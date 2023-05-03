@@ -4,17 +4,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object MovieDbClient {
-
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("https://developers.themoviedb.org/3/")
+    val urlBase = "https://api.themoviedb.org/3/"
+    val retrofit = Retrofit.Builder()
+        .baseUrl(urlBase)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-    private val service : TheMovieDbService = retrofit.create(TheMovieDbService::class.java)
+    val service : TheMovieDbService = retrofit.create(TheMovieDbService::class.java)
 
-    fun getRetrofit(): Retrofit? {
-        return this.retrofit;
-    }
-    fun getService(): TheMovieDbService {
-        return this.service;
-    }
 }

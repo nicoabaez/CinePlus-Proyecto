@@ -1,5 +1,6 @@
 package com.ort.cineplus.fragments
 
+import android.annotation.SuppressLint
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.util.Log
@@ -13,7 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ort.cineplus.adapters.MovieAdapter
 import com.ort.cineplus.databinding.FragmentListaBinding
-import com.ort.cineplus.entities.MovieRepository
+import com.ort.cineplus.entities.PopularMoviesRepository
 import com.ort.cineplus.models.PopularMovies
 import com.ort.cineplus.models.TheMovieDbService
 import kotlinx.coroutines.CoroutineScope
@@ -32,7 +33,7 @@ class ListaFragment : Fragment(), OnQueryTextListener {
     private val binding get() = _binding!!
 
     private lateinit var adapter: MovieAdapter
-    private var repository: MovieRepository = MovieRepository()
+    private var repository: PopularMoviesRepository = PopularMoviesRepository()
     private var movieList = repository.movies
 
     override fun onCreateView(
@@ -51,14 +52,13 @@ class ListaFragment : Fragment(), OnQueryTextListener {
     }
 
     private fun initRecyclerView(){
-        binding.recyclerMovie.layoutManager = LinearLayoutManager(this.context)
+        binding.recyclerMovie.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL,false)
         adapter = MovieAdapter(movieList){position ->
             val action = ListaFragmentDirections.actionListaFragmentToDetalleFragment(movieList[position])
             findNavController().navigate(action)
         }
         binding.recyclerMovie.adapter = adapter
     }
-
 
     fun getRetrofit() : Retrofit {
         return Retrofit.Builder()
@@ -70,18 +70,18 @@ class ListaFragment : Fragment(), OnQueryTextListener {
     private fun getPopularMovies() {
         CoroutineScope(Dispatchers.IO).launch {
             val retrofit = getRetrofit()
-            //val retrofit = MovieDbClient.getRetrofit()
             val service = retrofit.create(TheMovieDbService::class.java)
-            //val service = MovieDbClient.getService()
             val call: Call<PopularMovies> = service.getPopularMovies("movie/popular?api_key=63057ce88755d35487b8da66201da7b3&language=en-US&page=1")
 
             call.enqueue(object : Callback<PopularMovies> {
+                @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(call: Call<PopularMovies>, response: Response<PopularMovies>) {
                     if (response.isSuccessful) {
                         val respuestaPeliculas = response.body()?.results ?: emptyList()
+                        binding.textView.text = repository.getCategoria()
                         movieList.clear()
                         movieList.addAll(respuestaPeliculas)
-                        Log.d("PELICULAS AÑADIDAS:", "PELICULAS AÑADIDAS2 : $respuestaPeliculas")
+                        Log.d("PELICULAS AÑADIDAS:", "PELICULAS AÑADIDAS: $respuestaPeliculas")
                         adapter.notifyDataSetChanged()
                     }
                 }
@@ -91,13 +91,13 @@ class ListaFragment : Fragment(), OnQueryTextListener {
             })
         }
     }
-
     private fun buscarPorNombre(query: String) {
         CoroutineScope(Dispatchers.IO).launch {
             val retrofit = getRetrofit()
             val service = retrofit.create(TheMovieDbService::class.java)
             val call: Call<PopularMovies> = service.getPopularMovies("search/movie?api_key=63057ce88755d35487b8da66201da7b3&language=en-US&query=${query}&page=1&include_adult=false")
             call.enqueue(object : Callback<PopularMovies> {
+                @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(call: Call<PopularMovies>, response: Response<PopularMovies>) {
                     if (response.isSuccessful) {
                         val respuestaPeliculas = response.body()?.results ?: emptyList()
@@ -134,6 +134,4 @@ class ListaFragment : Fragment(), OnQueryTextListener {
     override fun onQueryTextChange(p0: String?): Boolean {
         return true
     }
-
-
 }
