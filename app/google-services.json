@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "339132765622",
+    "project_id": "tp3-ort",
+    "storage_bucket": "tp3-ort.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339132765622:android:d9029ff0b52fb6c56f1d17",
+        "android_client_info": {
+          "package_name": "com.ort.cineplus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339132765622-gbabmtf1br12p5jaog4v5vosbl2c5bgl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArG6KWyz5WHi5OrlAUmlrb-JO3Z4pAVfw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339132765622-gbabmtf1br12p5jaog4v5vosbl2c5bgl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
