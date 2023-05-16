@@ -1,5 +1,6 @@
 package com.ort.cineplus.fragments
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,10 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.ort.cineplus.R
 import com.ort.cineplus.activities.LoginActivity
+import com.ort.cineplus.activities.MainActivity
 
 
 class Login : Fragment() {
@@ -36,7 +40,11 @@ class Login : Fragment() {
         btnLogin = v.findViewById(R.id.btnLogin)
 
         btnLogin.setOnClickListener(){
-            startActivity(Intent(activity, LoginActivity::class.java))
+            if(viewModel.login(email.text.toString(), pass.text.toString())){
+                startActivity(Intent(activity, MainActivity::class.java))
+            }else{
+                Snackbar.make(v, "User or Password incorrect..", Snackbar.LENGTH_SHORT).show()
+            }
         }
         return v
     }
@@ -45,6 +53,10 @@ class Login : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         // TODO: Use the ViewModel
+
+    }
+
+    fun showError(){
 
     }
 
