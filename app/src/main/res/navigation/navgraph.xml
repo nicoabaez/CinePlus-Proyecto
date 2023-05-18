@@ -33,18 +33,8 @@
             app:destination="@id/listaFragment" />
     </fragment>
     <fragment
-        android:id="@+id/login"
-        android:name="com.ort.cineplus.fragments.Login"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
-    <fragment
         android:id="@+id/commentList"
         android:name="com.ort.cineplus.fragments.CommentList"
         android:label="fragment_comment_list"
         tools:layout="@layout/fragment_comment_list" />
-    <fragment
-        android:id="@+id/register"
-        android:name="com.ort.cineplus.fragments.Register"
-        android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
 </navigation>

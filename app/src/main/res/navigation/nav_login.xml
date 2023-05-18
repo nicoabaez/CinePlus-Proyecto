@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_login">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_login"
+    app:startDestination="@id/startApp2">
 
+    <fragment
+        android:id="@+id/login2"
+        android:name="com.ort.cineplus.fragments.Login"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/register2"
+        android:name="com.ort.cineplus.fragments.Register"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/startApp2"
+        android:name="com.ort.cineplus.fragments.StartApp"
+        android:label="fragment_start_app"
+        tools:layout="@layout/fragment_start_app" />
 </navigation>

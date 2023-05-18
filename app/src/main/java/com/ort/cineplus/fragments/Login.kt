@@ -3,6 +3,7 @@ package com.ort.cineplus.fragments
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,7 +44,8 @@ class Login : Fragment() {
             if(viewModel.login(email.text.toString(), pass.text.toString())){
                 startActivity(Intent(activity, MainActivity::class.java))
             }else{
-                Snackbar.make(v, "User or Password incorrect..", Snackbar.LENGTH_SHORT).show()
+                Log.d("ERROR EN LOGIN:", "EL LOGIN DIO FALSO")
+                Snackbar.make(v, "User or Password incorrect..", Snackbar.LENGTH_LONG).show()
             }
         }
         return v
