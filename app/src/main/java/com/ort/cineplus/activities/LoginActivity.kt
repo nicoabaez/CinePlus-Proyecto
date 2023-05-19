@@ -8,10 +8,11 @@ import com.ort.cineplus.R
 
 class LoginActivity : AppCompatActivity() {
 
-    private val SPLASH_TIME_OUT:Long = 3000;
+    private val SPLASH_TIME_OUT:Long = 3000
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
 
         Handler().postDelayed(
             {
@@ -19,5 +20,7 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             }
             , SPLASH_TIME_OUT)
+
+
     }
 }

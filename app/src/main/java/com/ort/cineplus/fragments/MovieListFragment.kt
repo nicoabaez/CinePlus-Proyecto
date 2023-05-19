@@ -13,7 +13,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ort.cineplus.adapters.MovieAdapter
-import com.ort.cineplus.databinding.FragmentListaBinding
+import com.ort.cineplus.databinding.FragmentMovieListBinding
 import com.ort.cineplus.entities.PopularMoviesRepository
 import com.ort.cineplus.models.PopularMovies
 import com.ort.cineplus.models.TheMovieDbService
@@ -27,9 +27,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 
-class ListaFragment : Fragment(), OnQueryTextListener {
+class MovieListFragment : Fragment(), OnQueryTextListener {
 
-    private var _binding: FragmentListaBinding? = null
+    private var _binding: FragmentMovieListBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var adapter: MovieAdapter
@@ -40,7 +40,7 @@ class ListaFragment : Fragment(), OnQueryTextListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentListaBinding.inflate(inflater,container,false)
+        _binding = FragmentMovieListBinding.inflate(inflater,container,false)
         initRecyclerView()
         binding.searchMovie.setOnQueryTextListener(this)
         return binding.root
@@ -54,7 +54,7 @@ class ListaFragment : Fragment(), OnQueryTextListener {
     private fun initRecyclerView(){
         binding.recyclerMovie.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL,false)
         adapter = MovieAdapter(movieList){position ->
-            val action = ListaFragmentDirections.actionListaFragmentToDetalleFragment(movieList[position])
+            val action = MovieListFragmentDirections.actionListaFragmentToDetalleFragment(movieList[position])
             findNavController().navigate(action)
         }
         binding.recyclerMovie.adapter = adapter

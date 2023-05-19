@@ -3,38 +3,54 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navgraph"
-    app:startDestination="@id/listaFragment">
+    app:startDestination="@id/movieListFragment">
 
     <fragment
-        android:id="@+id/listaFragment"
-        android:name="com.ort.cineplus.fragments.ListaFragment"
-        android:label="listaFragment"
-        tools:layout="@layout/fragment_lista">
+        android:id="@+id/movieListFragment"
+        android:name="com.ort.cineplus.fragments.MovieListFragment"
+        android:label="movieListFragment"
+        tools:layout="@layout/fragment_movie_list">
         <action
             android:id="@+id/action_listaFragment_to_detalleFragment"
-            app:destination="@id/detalleFragment" />
+            app:destination="@id/movieDetailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/detalleFragment"
-        android:name="com.ort.cineplus.fragments.DetalleFragment"
-        android:label="fragment_detalle"
-        tools:layout="@layout/fragment_detalle" >
+        android:id="@+id/movieDetailFragment"
+        android:name="com.ort.cineplus.fragments.MovieDetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_movie_detail">
         <argument
             android:name="movie"
             app:argType="com.ort.cineplus.entities.MovieX" />
-    </fragment>
-    <fragment
-        android:id="@+id/startApp"
-        android:name="com.ort.cineplus.fragments.StartApp"
-        android:label="fragment_start_app"
-        tools:layout="@layout/fragment_start_app" >
-        <action
-            android:id="@+id/action_startApp_to_listaFragment"
-            app:destination="@id/listaFragment" />
     </fragment>
     <fragment
         android:id="@+id/commentList"
         android:name="com.ort.cineplus.fragments.CommentList"
         android:label="fragment_comment_list"
         tools:layout="@layout/fragment_comment_list" />
+    <fragment
+        android:id="@+id/actorDetailFragment"
+        android:name="com.ort.cineplus.fragments.ActorDetailFragment"
+        android:label="fragment_actor_detail"
+        tools:layout="@layout/fragment_actor_detail" />
+    <fragment
+        android:id="@+id/commentCreateFragment"
+        android:name="com.ort.cineplus.fragments.CommentCreateFragment"
+        android:label="fragment_comment_create"
+        tools:layout="@layout/fragment_comment_create" />
+    <fragment
+        android:id="@+id/configApp"
+        android:name="com.ort.cineplus.fragments.ConfigApp"
+        android:label="fragment_config_app"
+        tools:layout="@layout/fragment_config_app" />
+    <fragment
+        android:id="@+id/favMoviesListFragment"
+        android:name="com.ort.cineplus.fragments.FavMoviesListFragment"
+        android:label="fragment_fav_movies_list"
+        tools:layout="@layout/fragment_fav_movies_list" />
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.ort.cineplus.fragments.Profile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

@@ -3,8 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
         <item
-            android:id="@+id/listaFragment"
+            android:id="@+id/movieListFragment"
             android:icon="@drawable/iconhome"
             android:title="Películas"
+            tools:ignore="HardcodedText" />
+
+        <item
+            android:id="@+id/profile"
+            android:icon="@drawable/iconuser"
+            android:title="Perfil"
             tools:ignore="HardcodedText" />
 </menu>
