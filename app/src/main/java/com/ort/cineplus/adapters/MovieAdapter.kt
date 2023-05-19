@@ -27,7 +27,7 @@ class MovieAdapter (
 
         //private fun setTitle(title: String) { binding.txtTitle.text = title    }
         //private fun setDesc(desc: String)   { binding.txtDesc.text = desc       }
-        private fun setImage(img: String)   { Glide.with(binding.imgView.context).load("https://image.tmdb.org/t/p/w200${ img }").into(binding.imgView) }
+        private fun setImage(img: String)   { Glide.with(binding.imgView.context).load("https://image.tmdb.org/t/p/w500${ img }").into(binding.imgView) }
 
         fun getCard(): CardView { return binding.movieCard }
 

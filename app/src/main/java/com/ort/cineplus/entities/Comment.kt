@@ -7,7 +7,8 @@ import kotlinx.parcelize.Parcelize
 class Comment (
     val id: Int,
     val user: User,
-    val detailComment: String
+    val detailComment: String,
+//    val valoration: Int
 ): Parcelable {
 
 }
