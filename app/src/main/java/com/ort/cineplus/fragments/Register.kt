@@ -3,12 +3,15 @@ package com.ort.cineplus.fragments
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 
 import com.ort.cineplus.R
 import com.ort.cineplus.entities.User
@@ -27,6 +30,7 @@ class Register : Fragment() {
     private lateinit var passConfirm: EditText
     private lateinit var btnRegister: Button
     private lateinit var user: User
+    private val action = RegisterDirections.registerToLogin()
 
 
     @SuppressLint("MissingInflatedId")
@@ -43,10 +47,23 @@ class Register : Fragment() {
         btnRegister = v.findViewById(R.id.btnRegister)
 
         btnRegister.setOnClickListener() {
-            user = User(0, userName.text.toString(), email.text.toString(), pass.text.toString() )
-            viewModel.registerUser(user);
+            if (viewModel.checkPass(pass.text.toString(), passConfirm.text.toString())) {
+                user = User(
+                    userName.text.toString(),
+                    email.text.toString(),
+                    pass.text.toString(),
+                    false
+                )
+                if (viewModel.authRegister(user)) {
+                    Snackbar.make(v, "User registered succefully", Snackbar.LENGTH_LONG).show()
+                    findNavController().navigate(action);
+                } else {
+                    Snackbar.make(v, "The email already exist...", Snackbar.LENGTH_LONG).show()
+                }
+            } else {
+                Snackbar.make(v, "Invalid passwords", Snackbar.LENGTH_LONG).show()
+            }
         }
-
         return v;
     }
 

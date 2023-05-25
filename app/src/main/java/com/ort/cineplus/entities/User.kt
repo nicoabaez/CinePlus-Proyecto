@@ -6,12 +6,12 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class User (
-    val id: Int,
     val name: String,
     val email: String,
-    val pass: String
+    val pass: String,
+    val logged: Boolean
 
 
         ): Parcelable {
-    constructor(): this(0, "", "", "")
+    constructor(): this("", "", "", false)
 }

@@ -1,10 +1,14 @@
 package com.ort.cineplus.activities
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.ort.cineplus.R
+import com.ort.cineplus.fragments.StartAppDirections
 
 class LoginActivity : AppCompatActivity() {
 
@@ -16,11 +20,8 @@ class LoginActivity : AppCompatActivity() {
 
         Handler().postDelayed(
             {
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+              startActivity(Intent(this, MainActivity::class.java))
             }
             , SPLASH_TIME_OUT)
-
-
     }
 }
