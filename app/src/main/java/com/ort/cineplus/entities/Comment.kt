@@ -11,5 +11,5 @@ class Comment (
     val detailComment: String,
 //    val valoration: Int
 ): Parcelable {
-
+    constructor(): this(0,"",0,"")
 }

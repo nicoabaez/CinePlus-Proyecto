@@ -20,8 +20,10 @@ class Profile : Fragment() {
     }
 
     private lateinit var viewModel: ProfileViewModel
-    lateinit var userEmail: TextView;
-    lateinit var btn: Button;
+    lateinit var userEmail: TextView
+    lateinit var btnShowUser: Button
+    lateinit var btnGoToLogin: Button
+    lateinit var btnGoToRegister: Button
     val user = Firebase.auth.currentUser
 
     @SuppressLint("MissingInflatedId")
@@ -29,16 +31,17 @@ class Profile : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var v = inflater.inflate(R.layout.fragment_profile, container, false)
+        val v = inflater.inflate(R.layout.fragment_profile, container, false)
         userEmail = v.findViewById(R.id.lblUserEmail)
-        btn = v.findViewById(R.id.btnGoToLoggin)
+        btnShowUser = v.findViewById(R.id.btnShowUser)
+        btnGoToLogin = v.findViewById(R.id.goToLogin)
+        btnGoToRegister = v.findViewById(R.id.goToRegister)
 
-        btn.setOnClickListener(){
-            userEmail.text = user?.email.toString();
+        btnShowUser.setOnClickListener(){
+            userEmail.text = user?.email.toString()
         }
         return v
     }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)

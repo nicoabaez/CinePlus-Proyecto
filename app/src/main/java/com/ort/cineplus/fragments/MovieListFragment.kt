@@ -78,7 +78,7 @@ class MovieListFragment : Fragment(), OnQueryTextListener {
                 override fun onResponse(call: Call<PopularMovies>, response: Response<PopularMovies>) {
                     if (response.isSuccessful) {
                         val respuestaPeliculas = response.body()?.results ?: emptyList()
-                        binding.textView.text = repository.getCategoria()
+                        binding.txtView.text = repository.getCategoria()
                         movieList.clear()
                         movieList.addAll(respuestaPeliculas)
                         Log.d("PELICULAS AÑADIDAS:", "PELICULAS AÑADIDAS: $respuestaPeliculas")

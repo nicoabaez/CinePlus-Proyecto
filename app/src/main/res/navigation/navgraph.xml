@@ -28,12 +28,15 @@
     </fragment>
     <fragment
         android:id="@+id/commentList"
-        android:name="com.ort.cineplus.fragments.CommentList"
+        android:name="com.ort.cineplus.fragments.CommentListFragment"
         android:label="fragment_comment_list"
         tools:layout="@layout/fragment_comment_list" >
         <argument
             android:name="movieId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_commentList_to_commentDetailFragment"
+            app:destination="@id/commentDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/actorDetailFragment"
@@ -60,4 +63,13 @@
         android:name="com.ort.cineplus.fragments.Profile"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/commentDetailFragment"
+        android:name="com.ort.cineplus.fragments.CommentDetailFragment"
+        android:label="fragment_comment_detail"
+        tools:layout="@layout/fragment_comment_detail" >
+        <argument
+            android:name="Comment"
+            app:argType="com.ort.cineplus.entities.Comment" />
+    </fragment>
 </navigation>
