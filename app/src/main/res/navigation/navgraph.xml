@@ -22,12 +22,19 @@
         <argument
             android:name="movie"
             app:argType="com.ort.cineplus.entities.MovieX" />
+        <action
+            android:id="@+id/action_movieDetailFragment_to_commentList"
+            app:destination="@id/commentList" />
     </fragment>
     <fragment
         android:id="@+id/commentList"
         android:name="com.ort.cineplus.fragments.CommentList"
         android:label="fragment_comment_list"
-        tools:layout="@layout/fragment_comment_list" />
+        tools:layout="@layout/fragment_comment_list" >
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/actorDetailFragment"
         android:name="com.ort.cineplus.fragments.ActorDetailFragment"

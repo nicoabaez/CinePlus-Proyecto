@@ -5,18 +5,29 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.ort.cineplus.R
 import com.ort.cineplus.databinding.FragmentMovieDetailBinding
 
 class MovieDetailFragment : Fragment() {
     private var _binding: FragmentMovieDetailBinding? = null
     private val binding get() = _binding!!
+    private lateinit var btnCommentList : Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMovieDetailBinding.inflate(inflater,container,false)
+
+        btnCommentList = binding.btnCommentList;
+
+        btnCommentList.setOnClickListener(){
+            val action = MovieDetailFragmentDirections.actionMovieDetailFragmentToCommentList(MovieDetailFragmentArgs.fromBundle(requireArguments()).movie.id)
+            findNavController().navigate(action)
+        }
         return binding.root
     }
 
