@@ -50,7 +50,7 @@
         tools:layout="@layout/fragment_comment_create" />
     <fragment
         android:id="@+id/configApp"
-        android:name="com.ort.cineplus.fragments.ConfigApp"
+        android:name="com.ort.cineplus.fragments.ConfigAppFragment"
         android:label="fragment_config_app"
         tools:layout="@layout/fragment_config_app" />
     <fragment
@@ -60,7 +60,7 @@
         tools:layout="@layout/fragment_fav_movies_list" />
     <fragment
         android:id="@+id/profile"
-        android:name="com.ort.cineplus.fragments.Profile"
+        android:name="com.ort.cineplus.fragments.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment

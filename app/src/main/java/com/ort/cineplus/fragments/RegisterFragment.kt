@@ -1,9 +1,7 @@
 package com.ort.cineplus.fragments
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,10 +15,10 @@ import com.ort.cineplus.R
 import com.ort.cineplus.entities.User
 
 
-class Register : Fragment() {
+class RegisterFragment : Fragment() {
 
     companion object {
-        fun newInstance() = Register()
+        fun newInstance() = RegisterFragment()
     }
 
     private lateinit var viewModel: RegisterViewModel
@@ -30,15 +28,13 @@ class Register : Fragment() {
     private lateinit var passConfirm: EditText
     private lateinit var btnRegister: Button
     private lateinit var user: User
-    private val action = RegisterDirections.registerToLogin()
+    private val action = RegisterFragmentDirections.registerToLogin()
 
-
-    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       var v = inflater.inflate(R.layout.fragment_register, container, false)
+       val v = inflater.inflate(R.layout.fragment_register, container, false)
 
         userName = v.findViewById(R.id.txtUserName)
         email = v.findViewById(R.id.txtEmail)
@@ -56,7 +52,7 @@ class Register : Fragment() {
                 )
                 if (viewModel.authRegister(user)) {
                     Snackbar.make(v, "User registered succefully", Snackbar.LENGTH_LONG).show()
-                    findNavController().navigate(action);
+                    findNavController().navigate(action)
                 } else {
                     Snackbar.make(v, "The email already exist...", Snackbar.LENGTH_LONG).show()
                 }
@@ -64,7 +60,7 @@ class Register : Fragment() {
                 Snackbar.make(v, "Invalid passwords", Snackbar.LENGTH_LONG).show()
             }
         }
-        return v;
+        return v
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

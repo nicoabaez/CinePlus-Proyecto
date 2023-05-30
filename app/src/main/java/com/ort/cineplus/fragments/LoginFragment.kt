@@ -1,6 +1,5 @@
 package com.ort.cineplus.fragments
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,20 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.ort.cineplus.R
-import com.ort.cineplus.activities.LoginActivity
 import com.ort.cineplus.activities.MainActivity
 
 
-class Login : Fragment() {
+class LoginFragment : Fragment() {
 
     companion object {
-        fun newInstance() = Login()
+        fun newInstance() = LoginFragment()
     }
 
     private lateinit var viewModel: LoginViewModel
@@ -35,7 +31,7 @@ class Login : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        var v = inflater.inflate(R.layout.fragment_login, container, false)
+        val v = inflater.inflate(R.layout.fragment_login, container, false)
 
         email = v.findViewById(R.id.txtEmailLogin)
         pass = v.findViewById(R.id.txtPassLogin)
@@ -58,9 +54,4 @@ class Login : Fragment() {
         // TODO: Use the ViewModel
 
     }
-
-    fun showError(){
-
-    }
-
 }

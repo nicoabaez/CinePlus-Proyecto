@@ -6,7 +6,5 @@ import retrofit2.http.Url
 
 interface TheMovieDbService {
     @GET
-    fun getPopularMovies(@Url url:String): Call<PopularMovies>
-
-
+    fun getMovies(@Url url:String): Call<ApiResponse>
 }

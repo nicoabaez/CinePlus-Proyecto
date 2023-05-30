@@ -1,6 +1,5 @@
 package com.ort.cineplus.fragments
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,10 +12,10 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.ort.cineplus.R
 
-class Profile : Fragment() {
+class ProfileFragment : Fragment() {
 
     companion object {
-        fun newInstance() = Profile()
+        fun newInstance() = ProfileFragment()
     }
 
     private lateinit var viewModel: ProfileViewModel
@@ -26,7 +25,6 @@ class Profile : Fragment() {
     lateinit var btnGoToRegister: Button
     val user = Firebase.auth.currentUser
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

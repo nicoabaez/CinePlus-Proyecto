@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/login2"
-        android:name="com.ort.cineplus.fragments.Login"
+        android:name="com.ort.cineplus.fragments.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
     <fragment
         android:id="@+id/register2"
-        android:name="com.ort.cineplus.fragments.Register"
+        android:name="com.ort.cineplus.fragments.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/startApp2"
-        android:name="com.ort.cineplus.fragments.StartApp"
+        android:name="com.ort.cineplus.fragments.StartAppFragment"
         android:label="fragment_start_app"
         tools:layout="@layout/fragment_start_app" >
         <action

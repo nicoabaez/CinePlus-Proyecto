@@ -12,7 +12,7 @@ import com.ort.cineplus.entities.MovieX
 
 class MovieAdapter (
     private var movieList: MutableList<MovieX>,
-    var onClick : (Int) -> Unit
+    private var onClick : (MovieX) -> Unit
     ) : RecyclerView.Adapter<MovieAdapter.MovieHolder>() {
 
     class MovieHolder(v: View) : RecyclerView.ViewHolder(v) {
@@ -22,7 +22,7 @@ class MovieAdapter (
         fun bind(m:MovieX){
             this.setImage(m.poster_path) // Imagen la pelicula en el recylerView
         }
-        private fun setImage(img: String)   { Glide.with(binding.imgView.context).load("https://image.tmdb.org/t/p/w500${ img }").into(binding.imgView) }
+        private fun setImage(img: String)   { Glide.with(binding.imgView.context).load("https://image.tmdb.org/t/p/original/${ img }").dontAnimate().into(binding.imgView) }
 
         fun getCard(): CardView { return binding.movieCard }
 
@@ -36,8 +36,14 @@ class MovieAdapter (
     }
 
     override fun onBindViewHolder(holder: MovieHolder, position: Int) {
-        val item : MovieX = movieList[position]
-        holder.bind(item)
-        holder.getCard().setOnClickListener { onClick(position) }
+        val movie = movieList[position]
+        holder.bind(movie)
+        holder.getCard().setOnClickListener { onClick(movie) }
     }
+    //fun getItem(position: Int): MovieX { return movieList[position] }
+    /*@SuppressLint("NotifyDataSetChanged")
+    fun updateMovieList(newList: MutableList<MovieX>) {
+        movieList = newList.toMutableList()
+        notifyDataSetChanged()
+    }*/
 }

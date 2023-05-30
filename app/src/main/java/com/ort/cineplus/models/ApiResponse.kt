@@ -2,9 +2,9 @@ package com.ort.cineplus.models
 
 import com.ort.cineplus.entities.MovieX
 
-data class PopularMovies(
+data class ApiResponse(
     val page: Int,
-    val results: List<MovieX>,
+    val results: MutableList<MovieX>,
     val total_pages: Int,
     val total_results: Int
 )
