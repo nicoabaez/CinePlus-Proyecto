@@ -24,10 +24,10 @@ class RegisterViewModel : ViewModel() {
             auth.createUserWithEmailAndPassword(user.email, user.pass)
                 .addOnCompleteListener() { task ->
                     if (task.isSuccessful) {
-                        database.collection("Users")
-                            .add(user)
+                        database.collection("Users").document(auth.uid.toString())
+                            .set(user)
                             .addOnSuccessListener { documentReference ->
-                                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference}")
                             }
                             .addOnFailureListener { e ->
                                 Log.w(TAG, "Error adding document", e)

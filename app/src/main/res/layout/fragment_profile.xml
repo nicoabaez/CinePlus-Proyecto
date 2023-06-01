@@ -5,8 +5,9 @@
     android:id="@+id/frameLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#3A1673"
     android:visibility="visible"
-    tools:context=".fragments.Profile">
+    tools:context=".fragments.ProfileFragment">
 
     <TextView
         android:id="@+id/lblMsgNoLogged"
@@ -15,10 +16,11 @@
         android:layout_marginTop="200dp"
         android:layout_marginBottom="50dp"
         android:autoText="false"
-        android:text="If you want to see your profile, you will need logged."
+        android:text="If you want to see your profile, you will need to loged."
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/btnGoToLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="GO TO LOGIN"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblMsgNoLogged" />
@@ -40,9 +42,88 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Logout"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="176dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="177dp" />
+
+    <ImageView
+        android:id="@+id/imgProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/guideline9"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline8"
+        tools:src="@drawable/fui_ic_anonymous_white_24dp" />
+
+    <TextView
+        android:id="@+id/lblTitleUserNameProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Username:"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/lblTitleEmailProfile"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+
+    <TextView
+        android:id="@+id/lblTitleEmailProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Email: "
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline9"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/lblTitleUserNameProfile" />
+
+    <TextView
+        android:id="@+id/lblUserNnnnameProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="userPrueba"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/lblEmailProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lblTitleUserNameProfile"
+        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+
+    <TextView
+        android:id="@+id/lblEmailProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="email@prueba.com"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lblTitleEmailProfile"
+        app:layout_constraintTop_toBottomOf="@+id/lblUserNnnnameProfile" />
 </androidx.constraintlayout.widget.ConstraintLayout>

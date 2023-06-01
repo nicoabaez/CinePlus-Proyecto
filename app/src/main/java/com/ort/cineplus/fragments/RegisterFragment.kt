@@ -28,7 +28,7 @@ class RegisterFragment : Fragment() {
     private lateinit var passConfirm: EditText
     private lateinit var btnRegister: Button
     private lateinit var user: User
-    private val action = RegisterDirections.registerToLogin()
+    private val action = RegisterFragmentDirections.registerToLogin()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -28,7 +28,7 @@ class LoginFragment : Fragment() {
     private lateinit var pass: EditText
     private lateinit var btnLogin: Button
     private lateinit var btnGoToRegister: Button
-    private val action = LoginDirections.loginGoToRegister()
+    private val action = LoginFragmentDirections.loginGoToRegister()
 
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
