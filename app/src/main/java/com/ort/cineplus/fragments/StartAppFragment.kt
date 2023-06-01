@@ -8,24 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import com.ort.cineplus.R
 
-class ConfigApp : Fragment() {
+class StartAppFragment : Fragment() {
 
     companion object {
-        fun newInstance() = ConfigApp()
+        fun newInstance() = StartAppFragment()
     }
 
-    private lateinit var viewModel: ConfigAppViewModel
+    private lateinit var viewModel: StartAppViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_config_app, container, false)
+        return inflater.inflate(R.layout.fragment_start_app, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ConfigAppViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(StartAppViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

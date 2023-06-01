@@ -1,137 +1,85 @@
 package com.ort.cineplus.fragments
 
-import android.annotation.SuppressLint
+
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ort.cineplus.adapters.MovieAdapter
 import com.ort.cineplus.databinding.FragmentMovieListBinding
-import com.ort.cineplus.entities.PopularMoviesRepository
-import com.ort.cineplus.models.PopularMovies
-import com.ort.cineplus.models.TheMovieDbService
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
+import androidx.lifecycle.ViewModelProvider
+import com.ort.cineplus.entities.MovieX
 
-class MovieListFragment : Fragment(), OnQueryTextListener {
+class MovieListFragment : Fragment() {
 
     private var _binding: FragmentMovieListBinding? = null
     private val binding get() = _binding!!
-
     private lateinit var adapter: MovieAdapter
-    private var repository: PopularMoviesRepository = PopularMoviesRepository()
-    private var movieList = repository.movies
+    private lateinit var viewModel: MovieListFragmentViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMovieListBinding.inflate(inflater,container,false)
-        initRecyclerView()
-        binding.searchMovie.setOnQueryTextListener(this)
+        _binding = FragmentMovieListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-        getPopularMovies()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this)[MovieListFragmentViewModel::class.java]
+        viewModel.movieList.observe(viewLifecycleOwner) { movies -> initRecyclerView(movies.toMutableList()) }
+        setupSearchView()
     }
 
-    private fun initRecyclerView(){
+    private fun initRecyclerView(movieList: MutableList<MovieX>){
         binding.recyclerMovie.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL,false)
-        adapter = MovieAdapter(movieList){position ->
-            val action = MovieListFragmentDirections.actionListaFragmentToDetalleFragment(movieList[position])
+        adapter = MovieAdapter(movieList) { movie ->
+            val action = MovieListFragmentDirections.actionListaFragmentToDetalleFragment(movie)
             findNavController().navigate(action)
         }
         binding.recyclerMovie.adapter = adapter
     }
 
-    fun getRetrofit() : Retrofit {
-        return Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/3/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
 
-    private fun getPopularMovies() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val retrofit = getRetrofit()
-            val service = retrofit.create(TheMovieDbService::class.java)
-            val call: Call<PopularMovies> = service.getPopularMovies("movie/popular?api_key=63057ce88755d35487b8da66201da7b3&language=en-US&page=1")
-
-            call.enqueue(object : Callback<PopularMovies> {
-                @SuppressLint("NotifyDataSetChanged")
-                override fun onResponse(call: Call<PopularMovies>, response: Response<PopularMovies>) {
-                    if (response.isSuccessful) {
-                        val respuestaPeliculas = response.body()?.results ?: emptyList()
-                        binding.txtView.text = repository.getCategoria()
-                        movieList.clear()
-                        movieList.addAll(respuestaPeliculas)
-                        Log.d("PELICULAS AÑADIDAS:", "PELICULAS AÑADIDAS: $respuestaPeliculas")
-                        adapter.notifyDataSetChanged()
-                    }
-                }
-                override fun onFailure(call: Call<PopularMovies>, t: Throwable) {
-                    Toast.makeText(context, "HA OCURRIDO UN ERROR:", Toast.LENGTH_SHORT).show()
-                }
-            })
+    /*private fun initRecyclerView(movieList: MutableList<MovieX>) {
+        if (!::adapter.isInitialized) {
+            adapter = MovieAdapter(movieList) { movie ->
+                val action = MovieListFragmentDirections.actionListaFragmentToDetalleFragment(movie)
+                findNavController().navigate(action)
+            }
+            binding.recyclerMovie.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            binding.recyclerMovie.adapter = adapter
+        }else{
+            adapter.updateMovieList(movieList)
         }
-    }
-    private fun buscarPorNombre(query: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val retrofit = getRetrofit()
-            val service = retrofit.create(TheMovieDbService::class.java)
-            val call: Call<PopularMovies> = service.getPopularMovies("search/movie?api_key=63057ce88755d35487b8da66201da7b3&language=en-US&query=${query}&page=1&include_adult=false")
-            call.enqueue(object : Callback<PopularMovies> {
-                @SuppressLint("NotifyDataSetChanged")
-                override fun onResponse(call: Call<PopularMovies>, response: Response<PopularMovies>) {
-                    if (response.isSuccessful) {
-                        val respuestaPeliculas = response.body()?.results ?: emptyList()
-                        movieList.clear()
-                        movieList.addAll(respuestaPeliculas)
-                        adapter.notifyDataSetChanged()
-                    }
-                }
-                override fun onFailure(call: Call<PopularMovies>, t: Throwable) {
-                    showError()
-                }
-            })
-            hideKeyboard()
+    }    */
 
-        }
-    }
 
     private fun hideKeyboard() {
         val imm: InputMethodManager = requireActivity().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(binding.viewRoot.windowToken, 0)
     }
 
-    private fun showError() {
-        Toast.makeText(context, "HA OCURRIDO UN ERROR:", Toast.LENGTH_SHORT).show()
-    }
+    private fun setupSearchView() {
+        binding.searchMovie.setOnQueryTextListener(object : OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (!query.isNullOrEmpty()) {
+                    viewModel.searchMoviesByName(query)
+                    hideKeyboard()
+                }
+                return true
+            }
 
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        if(!query.isNullOrEmpty()) {
-            buscarPorNombre(query)
-        }
-        return true
-    }
-
-    override fun onQueryTextChange(p0: String?): Boolean {
-        return true
+            override fun onQueryTextChange(p0: String?): Boolean {
+                return true
+            }
+        })
     }
 }
