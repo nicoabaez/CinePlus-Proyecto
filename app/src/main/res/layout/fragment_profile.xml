@@ -5,44 +5,44 @@
     android:id="@+id/frameLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:visibility="visible"
     tools:context=".fragments.Profile">
 
     <TextView
-        android:id="@+id/lblUserEmail"
+        android:id="@+id/lblMsgNoLogged"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/btnShowUser"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="50dp"
+        android:autoText="false"
+        android:text="If you want to see your profile, you will need logged."
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/btnGoToLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnShowUser"
+        android:id="@+id/btnGoToLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="AM I LOGIN?"
-        app:layout_constraintBottom_toTopOf="@+id/goToLogin"
+        android:layout_marginTop="15dp"
+        android:text="GO TO LOGIN"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblUserEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/lblMsgNoLogged" />
 
     <Button
-        android:id="@+id/goToLogin"
+        android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="IR AL LOGIN"
-        app:layout_constraintBottom_toTopOf="@+id/goToRegister"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/goToRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="IR AL REGISTER"
+        android:text="Logout"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

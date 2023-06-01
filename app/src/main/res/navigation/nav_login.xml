@@ -3,13 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_login"
-    app:startDestination="@id/startApp2">
+    app:startDestination="@id/login2">
 
     <fragment
         android:id="@+id/login2"
         android:name="com.ort.cineplus.fragments.Login"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/loginGoToRegister"
+            app:destination="@id/register2" />
+    </fragment>
     <fragment
         android:id="@+id/register2"
         android:name="com.ort.cineplus.fragments.Register"
@@ -18,14 +22,5 @@
         <action
             android:id="@+id/registerToLogin"
             app:destination="@id/login2" />
-    </fragment>
-    <fragment
-        android:id="@+id/startApp2"
-        android:name="com.ort.cineplus.fragments.StartApp"
-        android:label="fragment_start_app"
-        tools:layout="@layout/fragment_start_app" >
-        <action
-            android:id="@+id/startAppToRegister"
-            app:destination="@id/register2" />
     </fragment>
 </navigation>

@@ -62,7 +62,11 @@
         android:id="@+id/profile"
         android:name="com.ort.cineplus.fragments.Profile"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/profileGoToMovieList"
+            app:destination="@id/movieListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/commentDetailFragment"
         android:name="com.ort.cineplus.fragments.CommentDetailFragment"

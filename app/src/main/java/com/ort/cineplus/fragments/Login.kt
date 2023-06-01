@@ -1,5 +1,6 @@
 package com.ort.cineplus.fragments
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
@@ -13,6 +14,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.ort.cineplus.R
 import com.ort.cineplus.activities.LoginActivity
@@ -29,7 +31,10 @@ class Login : Fragment() {
     private lateinit var email: EditText
     private lateinit var pass: EditText
     private lateinit var btnLogin: Button
+    private lateinit var btnGoToRegister: Button
+    private val action = LoginDirections.loginGoToRegister()
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,6 +45,7 @@ class Login : Fragment() {
         email = v.findViewById(R.id.txtEmailLogin)
         pass = v.findViewById(R.id.txtPassLogin)
         btnLogin = v.findViewById(R.id.btnLogin)
+        btnGoToRegister = v.findViewById(R.id.btnGoToRegister)
 
         btnLogin.setOnClickListener(){
             if(viewModel.login(email.text.toString(), pass.text.toString())){
@@ -48,6 +54,10 @@ class Login : Fragment() {
                 Log.d("ERROR EN LOGIN:", "EL LOGIN DIO FALSO")
                 Snackbar.make(v, "User or Password incorrect..", Snackbar.LENGTH_LONG).show()
             }
+        }
+
+        btnGoToRegister.setOnClickListener(){
+            findNavController().navigate(action)
         }
         return v
     }
