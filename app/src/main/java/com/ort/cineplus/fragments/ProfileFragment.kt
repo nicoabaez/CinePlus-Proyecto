@@ -21,18 +21,15 @@ import com.ort.cineplus.R
 import com.ort.cineplus.activities.LoginActivity
 import com.ort.cineplus.activities.MainActivity
 
-class Profile : Fragment() {
+class ProfileFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = Profile()
-    }
 
     private lateinit var viewModel: ProfileViewModel
     lateinit var titleInfo: TextView
     lateinit var btnGoToLogin: Button
     lateinit var btnLogout: Button
     private val user = Firebase.auth.currentUser
-    private val goToMovieList = ProfileDirections.profileGoToMovieList()
+    private val goToMovieList = ProfileFragmentDirections.profileGoToMovieList()
 
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(

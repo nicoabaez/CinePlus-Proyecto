@@ -21,11 +21,7 @@ import com.ort.cineplus.activities.LoginActivity
 import com.ort.cineplus.activities.MainActivity
 
 
-class Login : Fragment() {
-
-    companion object {
-        fun newInstance() = Login()
-    }
+class LoginFragment : Fragment() {
 
     private lateinit var viewModel: LoginViewModel
     private lateinit var email: EditText
