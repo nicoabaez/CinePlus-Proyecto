@@ -5,11 +5,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class Comment (
-    val id: Int,
-    val userName: String,
+    val userEmail: String,
     val movieId: Int,
-    val detailComment: String,
-//    val valoration: Int
+    val detailComment: String
 ): Parcelable {
-    constructor(): this(0,"",0,"")
+    constructor(): this("",0,"")
 }

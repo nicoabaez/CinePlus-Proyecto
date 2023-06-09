@@ -2,12 +2,17 @@ package com.ort.cineplus.fragments
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.ktx.Firebase
 import com.ort.cineplus.adapters.CommentAdapter
 import com.ort.cineplus.databinding.FragmentCommentListBinding
 import com.ort.cineplus.entities.Comment
@@ -21,9 +26,12 @@ class CommentListFragment : Fragment() {
     private var _binding: FragmentCommentListBinding? = null
     private val binding get() = _binding!!
 
+    var database = Firebase.firestore
+
     private lateinit var viewModel: CommentListViewModel
     private lateinit var adapter: CommentAdapter
     private var commentList : MutableList<Comment> = mutableListOf()
+    private lateinit var btnCreateComment : Button
 
 
     //private lateinit var btnCommentList: Button
@@ -35,11 +43,33 @@ class CommentListFragment : Fragment() {
     ): View {
         _binding = FragmentCommentListBinding.inflate(inflater,container,false)
 
-        //CREO UN COMENTARIO PARA PROBAR
-        val c = Comment(1, "Pepancio", 12345,  "BEST PELICULA")
-        commentList.add(c)
+        var movieId = CommentListFragmentArgs.fromBundle(requireArguments()).movieId
 
-        initRecyclerView()
+        commentList.clear();
+
+        database.collection("Comments")
+            .whereEqualTo("movieId", movieId)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    commentList.add(document.toObject<Comment>())
+                }
+
+                initRecyclerView()
+            }
+            .addOnFailureListener { exception ->
+                Log.w("Main Activity", "Error getting documents.", exception)
+            }
+
+        btnCreateComment = binding.btnCreateComment;
+
+        btnCreateComment.text = "Crear Comentario";
+        btnCreateComment.setOnClickListener(){
+            val action = CommentListFragmentDirections.actionCommentListToCommentCreateFragment(movieId)
+            findNavController().navigate(action)
+        }
+
+
         //var id = CommentListArgs.fromBundle(requireArguments()).movieId
 
         return binding.root
