@@ -20,9 +20,19 @@ class CommentAdapter (
 
             fun bind(m: Comment){
                 this.setDetailComment(m.detailComment) // Muestro provisoriamente.
+                this.setUserEmailComment(m.userEmail)
             }
 
             private fun setDetailComment(detailComment: String) { binding.detailComment.text = detailComment    }
+            private fun setUserEmailComment(userEmail: String) {
+                if(userEmail == "null"){
+                    binding.userEmailComment.text = "Anonimo";
+                }
+                else{
+                    binding.userEmailComment.text = userEmail;
+                }
+
+            }
 
             fun getCard(): CardView { return binding.commentCard }
 
