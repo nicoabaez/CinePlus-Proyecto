@@ -13,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 
 import com.ort.cineplus.R
 import com.ort.cineplus.entities.User
+import com.ort.cineplus.viewmodels.RegisterViewModel
 
 
 class RegisterFragment : Fragment() {

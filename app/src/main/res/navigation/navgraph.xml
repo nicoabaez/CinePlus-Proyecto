@@ -42,11 +42,6 @@
             app:destination="@id/commentDetailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/actorDetailFragment"
-        android:name="com.ort.cineplus.fragments.ActorDetailFragment"
-        android:label="fragment_actor_detail"
-        tools:layout="@layout/fragment_actor_detail" />
-    <fragment
         android:id="@+id/commentCreateFragment"
         android:name="com.ort.cineplus.fragments.CommentCreateFragment"
         android:label="fragment_comment_create"

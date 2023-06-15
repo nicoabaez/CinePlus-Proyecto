@@ -13,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.ort.cineplus.databinding.FragmentCommentCreateBinding
 import com.ort.cineplus.entities.Comment
+import com.ort.cineplus.viewmodels.CommentCreateViewModel
 
 class CommentCreateFragment : Fragment() {
 

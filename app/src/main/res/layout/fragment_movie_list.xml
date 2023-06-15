@@ -26,10 +26,8 @@
         android:layout_height="40dp"
         android:background="#ffffff"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerMovie"
         app:layout_constraintTop_toBottomOf="@+id/searchMovie"
-        tools:ignore="HardcodedText"
-        />
+        tools:ignore="HardcodedText" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerMovie"
@@ -39,8 +37,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleCategory"
-        />
+        app:layout_constraintTop_toBottomOf="@id/titleCategory">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerMovie_2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scrollbars="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerMovie">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

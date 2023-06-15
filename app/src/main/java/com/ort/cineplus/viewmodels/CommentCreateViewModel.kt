@@ -1,4 +1,4 @@
-package com.ort.cineplus.fragments
+package com.ort.cineplus.viewmodels
 
 import android.content.ContentValues
 import android.util.Log

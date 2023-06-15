@@ -19,7 +19,7 @@ class CommentAdapter (
             private val binding = ItemCommentBinding.bind(v)
 
             fun bind(m: Comment){
-                this.setDetailComment(m.detailComment) // Muestro provisoriamente.
+                this.setDetailComment(m.detailComment)
                 this.setUserEmailComment(m.userEmail)
             }
 

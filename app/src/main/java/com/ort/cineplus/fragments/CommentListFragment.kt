@@ -16,6 +16,7 @@ import com.google.firebase.ktx.Firebase
 import com.ort.cineplus.adapters.CommentAdapter
 import com.ort.cineplus.databinding.FragmentCommentListBinding
 import com.ort.cineplus.entities.Comment
+import com.ort.cineplus.viewmodels.CommentListViewModel
 
 class CommentListFragment : Fragment() {
 

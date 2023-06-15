@@ -1,9 +1,7 @@
 package com.ort.cineplus.fragments
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
-import android.opengl.Visibility
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,15 +11,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.auth.User
 import com.google.firebase.ktx.Firebase
 import com.ort.cineplus.R
 import com.ort.cineplus.activities.LoginActivity
-import com.ort.cineplus.activities.MainActivity
-import org.w3c.dom.Text
+import com.ort.cineplus.viewmodels.ProfileViewModel
 
 class ProfileFragment : Fragment() {
 

@@ -1,9 +1,7 @@
-package com.ort.cineplus.fragments
+package com.ort.cineplus.viewmodels
 
-import android.app.Activity
 import android.content.ContentValues.TAG
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore

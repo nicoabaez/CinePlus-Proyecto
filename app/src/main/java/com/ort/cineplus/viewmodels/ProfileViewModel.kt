@@ -1,25 +1,25 @@
-package com.ort.cineplus.fragments
+package com.ort.cineplus.viewmodels
 
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.auth.User
+//import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.ktx.Firebase
 
 class ProfileViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 
     var auth: FirebaseAuth = FirebaseAuth.getInstance();
-    lateinit var user: User
-    var database = Firebase.firestore
+    //lateinit var user: User
+    //var database = Firebase.firestore
 
     fun logout(){
         auth.signOut()
     }
-
+/*
     fun getUser(): User{
 
        database.collection("Users").document(auth.uid.toString())
@@ -33,5 +33,7 @@ class ProfileViewModel : ViewModel() {
            }
         return user
     }
+
+ */
 
 }
