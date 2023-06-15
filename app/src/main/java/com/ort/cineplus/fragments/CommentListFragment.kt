@@ -85,8 +85,7 @@ class CommentListFragment : Fragment() {
     private fun initRecyclerView(){
         binding.recyclerComment.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL,false)
         adapter = CommentAdapter(commentList){position ->
-            val action = CommentListFragmentDirections.actionCommentListToCommentDetailFragment(commentList[position])
-            findNavController().navigate(action)
+
         }
         binding.recyclerComment.adapter = adapter
     }
