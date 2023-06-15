@@ -67,17 +67,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="177dp" />
+        app:layout_constraintGuide_begin="200dp" />
 
     <ImageView
         android:id="@+id/imgProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline9"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline8"
-        tools:src="@drawable/fui_ic_anonymous_white_24dp" />
+        app:srcCompat="@drawable/img_profile_base"
+        tools:src="@drawable/img_profile_base" />
 
     <TextView
         android:id="@+id/lblTitleUserNameProfile"
@@ -126,4 +128,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/lblTitleEmailProfile"
         app:layout_constraintTop_toBottomOf="@+id/lblUserNnnnameProfile" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
