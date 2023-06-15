@@ -20,6 +20,7 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModel
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.auth.User
 import com.google.firebase.ktx.Firebase
@@ -44,7 +45,6 @@ class ProfileFragment : Fragment() {
     lateinit var lblEmailProfile: TextView
     lateinit var imgProfile: ImageView
     private val user = Firebase.auth.currentUser
-    private val storageRef = Firebase.storage.reference
     private val goToMovieList = ProfileFragmentDirections.profileGoToMovieList()
 
     @SuppressLint("MissingInflatedId")
@@ -81,7 +81,7 @@ class ProfileFragment : Fragment() {
 
         imgProfile.setOnClickListener(){
            /* this.activity?.let { it1 -> viewModel.changeImageProfile(it1, 50) }*/
-            viewModel.changeImageProfile(activity!!, CODE)
+            selectImageProfile(CODE)
         }
 
         viewModel.user.observe(viewLifecycleOwner) { user ->
@@ -104,7 +104,7 @@ class ProfileFragment : Fragment() {
         Log.d(TAG, "onActivityResult: called")
         if (requestCode == 50 && resultCode == Activity.RESULT_OK) {
             data?.data?.let { imageUri ->
-                saveImageToFirebaseStorage(imageUri)
+                viewModel.saveImageToFirebaseStorage(imageUri)
             }
         }
     }
@@ -142,27 +142,19 @@ class ProfileFragment : Fragment() {
     private fun setInfoProfile(){
         lblUsernameProfile.text = viewModel.user.value
         lblEmailProfile.text = user?.email.toString()
+        var uri = viewModel.getImgUser(user?.uid.toString() )
+        if(uri != ""){
+            //falta completar para cambiar la imagen del perfil
+            Glide.with(this).load(viewModel.getImgUser(user?.uid.toString())).into(imgProfile)
+        }
+        Log.d(TAG, "la uri de la imagen es: + ${uri}")
+
     }
 
-    private fun saveImageToFirebaseStorage(imageUri: Uri) {
-        val reference = storageRef.child("mountains.jpg")
-        val referenceProfileImageRef = reference.child("profile_images/${user?.uid}.jpg")
-
-
-        val uploadTask = referenceProfileImageRef.putFile(imageUri)
-        uploadTask.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                // La imagen se ha subido correctamente
-                referenceProfileImageRef.downloadUrl.addOnSuccessListener { uri ->
-                    // Aquí puedes guardar la URL de descarga en Firestore o actualizar otros datos del usuario
-                    Log.d(TAG, "la uri de la imagen es +${uri}")
-                }
-            } else {
-                // Ha ocurrido un error al subir la imagen
-                val exception = task.exception
-                Log.d(TAG, "Hay un error al subir la imagen al storage +${task.exception}")
-            }
-        }
+    fun selectImageProfile(code: Int){
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        this.startActivityForResult(intent, code)
     }
 
 

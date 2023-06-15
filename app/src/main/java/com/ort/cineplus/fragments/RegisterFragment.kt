@@ -49,7 +49,7 @@ class RegisterFragment : Fragment() {
                     userName.text.toString(),
                     email.text.toString(),
                     pass.text.toString(),
-                    false
+                    ""
                 )
                 if (viewModel.authRegister(user)) {
                     Snackbar.make(v, "User registered successfully", Snackbar.LENGTH_LONG).show()
