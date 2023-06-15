@@ -10,8 +10,6 @@ import com.google.firebase.ktx.Firebase
 import com.ort.cineplus.entities.User
 
 class RegisterViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
-
     var database = Firebase.firestore
     private val auth: FirebaseAuth = FirebaseAuth.getInstance();
     private var users = mutableListOf<User>()
@@ -49,7 +47,7 @@ class RegisterViewModel : ViewModel() {
         return result;
     }
 
-    fun checkEmail(email: String) : Boolean {
+    private fun checkEmail(email: String) : Boolean {
         var result = false;
         database.collection("Users")
             .get().addOnSuccessListener { documents ->

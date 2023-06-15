@@ -52,13 +52,13 @@ class RegisterFragment : Fragment() {
                     false
                 )
                 if (viewModel.authRegister(user)) {
-                    Snackbar.make(v, "User registered succefully", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(v, "User registered successfully", Snackbar.LENGTH_LONG).show()
                     findNavController().navigate(action)
                 } else {
                     Snackbar.make(v, "The email already exist...", Snackbar.LENGTH_LONG).show()
                 }
             } else {
-                Snackbar.make(v, "Invalid passwords", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(v, "Invalid Credentials", Snackbar.LENGTH_LONG).show()
             }
         }
         return v
