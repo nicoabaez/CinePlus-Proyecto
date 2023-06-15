@@ -2,6 +2,8 @@ package com.ort.cineplus.fragments
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.opengl.Visibility
 import androidx.lifecycle.ViewModelProvider
@@ -90,6 +92,16 @@ class ProfileFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         // TODO: Use the ViewModel
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Log.d(TAG, "onActivityResult: called")
+        if (requestCode == CODE && resultCode == Activity.RESULT_OK) {
+            data?.data?.let { imageUri ->
+                viewModel.saveImageToFirebaseStorage(imageUri)
+            }
+        }
     }
 
 
