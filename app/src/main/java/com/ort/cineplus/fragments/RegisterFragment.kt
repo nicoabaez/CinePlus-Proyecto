@@ -8,12 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 
-import com.ort.cineplus.R
+import com.ort.cineplus.databinding.FragmentRegisterBinding
 import com.ort.cineplus.entities.User
 import com.ort.cineplus.viewmodels.RegisterViewModel
+import kotlinx.coroutines.launch
 
 
 class RegisterFragment : Fragment() {
@@ -29,45 +31,83 @@ class RegisterFragment : Fragment() {
     private lateinit var passConfirm: EditText
     private lateinit var btnRegister: Button
     private lateinit var user: User
+    private lateinit var v : View;
+    private var _binding: FragmentRegisterBinding? = null
+    private val binding get() = _binding!!
     private val action = RegisterFragmentDirections.registerToLogin()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-       val v = inflater.inflate(R.layout.fragment_register, container, false)
+    ): View {
+        _binding = FragmentRegisterBinding.inflate(inflater,container,false)
 
-        userName = v.findViewById(R.id.txtUserName)
-        email = v.findViewById(R.id.txtEmail)
-        pass = v.findViewById(R.id.txtPassword)
-        passConfirm = v.findViewById(R.id.txtPassConfirm)
-        btnRegister = v.findViewById(R.id.btnRegister)
 
-        btnRegister.setOnClickListener() {
-            if (viewModel.checkPass(pass.text.toString(), passConfirm.text.toString())) {
-                user = User(
-                    userName.text.toString(),
-                    email.text.toString(),
-                    pass.text.toString(),
-                    false
-                )
-                if (viewModel.authRegister(user)) {
-                    Snackbar.make(v, "User registered successfully", Snackbar.LENGTH_LONG).show()
-                    findNavController().navigate(action)
-                } else {
-                    Snackbar.make(v, "The email already exist...", Snackbar.LENGTH_LONG).show()
-                }
-            } else {
-                Snackbar.make(v, "Invalid Credentials", Snackbar.LENGTH_LONG).show()
-            }
-        }
-        return v
+        userName = binding.txtUserName
+        email = binding.txtEmail
+        pass = binding.txtPassword
+        passConfirm = binding.txtPassConfirm
+        btnRegister = binding.btnRegister
+        return binding.root
+
     }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
         // TODO: Use the ViewModel
 
-        }
     }
+    override fun onStart() {
+        super.onStart()
+        btnRegister.setOnClickListener() {
+            lifecycleScope.launch {
+                if (checkCredentials()) {
+                    user = User(
+                        userName.text.toString(),
+                        email.text.toString(),
+                        pass.text.toString(),
+                        false
+                    )
+                    viewModel.authRegister(user)
+                    findNavController().navigate(action)
+
+                } else {
+                    Snackbar.make(binding.root, "Could not register", Snackbar.LENGTH_LONG).show()
+                }
+            }
+
+        }
+
+
+
+        }
+    private suspend fun checkCredentials(): Boolean {
+        var isValid = true
+        // Validar campo Email
+        if (!viewModel.emailIsNotUsed(email)) {
+            isValid = false
+        }
+        // Validar campo contraseña
+        if (!viewModel.checkPass(passConfirm, pass)) {
+            isValid = false
+        }
+
+
+        return isValid
+    }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
