@@ -1,9 +1,12 @@
 package com.ort.cineplus.fragments
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
+import android.opengl.Visibility
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,16 +14,21 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.ViewModel
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.auth.User
 import com.google.firebase.ktx.Firebase
 import com.ort.cineplus.R
 import com.ort.cineplus.activities.LoginActivity
-import com.ort.cineplus.viewmodels.ProfileViewModel
+import com.ort.cineplus.activities.MainActivity
+import org.w3c.dom.Text
+import kotlin.math.log
 
 class ProfileFragment : Fragment() {
 
-
+    private val CODE = 50
     private lateinit var viewModel: ProfileViewModel
     lateinit var titleInfo: TextView
     lateinit var btnGoToLogin: Button
@@ -47,12 +55,13 @@ class ProfileFragment : Fragment() {
         lblTitleUsernameProfile = v.findViewById(R.id.lblTitleUserNameProfile)
         lblTitleEmailProfile = v.findViewById(R.id.lblTitleEmailProfile)
         imgProfile = v.findViewById(R.id.imgProfile)
+        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+        viewModel.getUserDatabase()
 
         if(user == null){
             showProfileNoLogged()
         }else {
             showProfileLogged()
-            setInfoProfile()
         }
 
         btnLogout.setOnClickListener(){
@@ -64,13 +73,26 @@ class ProfileFragment : Fragment() {
             goToLoggin()
         }
 
+        imgProfile.setOnClickListener(){
+            this.activity?.let { it1 -> viewModel.changeImageProfile(it1, this.CODE) }
+        }
+
+        viewModel.user.observe(viewLifecycleOwner) { user ->
+            user?.let {
+                setInfoProfile()
+                showProfileLogged()
+            }
+        }
+
         return v
     }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+
         // TODO: Use the ViewModel
     }
+
+
     private fun showProfileLogged(){
         titleInfo.visibility = View.GONE;
         btnGoToLogin.visibility = View.GONE;
@@ -80,6 +102,7 @@ class ProfileFragment : Fragment() {
         lblEmailProfile.visibility = View.VISIBLE
         lblUsernameProfile.visibility = View.VISIBLE
         imgProfile.visibility = View.VISIBLE
+        setInfoProfile()
 
     }
 
@@ -99,7 +122,10 @@ class ProfileFragment : Fragment() {
         startActivity(Intent(activity, LoginActivity::class.java))
     }
 
-    fun setInfoProfile(){
+    private fun setInfoProfile(){
+        lblUsernameProfile.text = viewModel.user.value
         lblEmailProfile.text = user?.email.toString()
     }
+
+
 }
