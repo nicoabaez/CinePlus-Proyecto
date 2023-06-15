@@ -49,12 +49,7 @@ class CommentCreateFragment : Fragment() {
         btnCreateCommentConfirm.text = "Crear";
         btnCreateCommentConfirm.setOnClickListener() {
             if (viewModel.checkComment(commentInput.text.toString())) {
-                comment = Comment(
-                    auth.currentUser?.email.toString(),
-                    movieId,
-                    commentInput.text.toString()
-                )
-                if (viewModel.postComment(comment)) {
+                if (viewModel.postComment(auth.currentUser?.email.toString(), movieId, commentInput.text.toString())) {
                     Snackbar.make(binding.root, "Your_Text", Snackbar.LENGTH_LONG);
 
                 } else {

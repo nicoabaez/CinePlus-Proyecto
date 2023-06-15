@@ -13,8 +13,14 @@ class CommentCreateViewModel : ViewModel() {
 
     var database = Firebase.firestore
     private val auth: FirebaseAuth = FirebaseAuth.getInstance();
-    fun postComment(comment: Comment): Boolean{
+    fun postComment(userEmail: String, movieId: Int, commentDescription: String): Boolean{
         var result = false;
+        val comment = Comment(
+            auth.currentUser?.email.toString(),
+            movieId,
+            commentDescription
+        )
+        
         database.collection("Comments").document()
             .set(comment)
             .addOnSuccessListener { documentReference ->

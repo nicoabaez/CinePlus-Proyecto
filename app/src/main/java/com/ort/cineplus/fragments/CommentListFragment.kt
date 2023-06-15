@@ -17,6 +17,7 @@ import com.ort.cineplus.adapters.CommentAdapter
 import com.ort.cineplus.databinding.FragmentCommentListBinding
 import com.ort.cineplus.entities.Comment
 import com.ort.cineplus.viewmodels.CommentListViewModel
+import kotlinx.coroutines.*
 
 class CommentListFragment : Fragment() {
 
@@ -26,8 +27,6 @@ class CommentListFragment : Fragment() {
 
     private var _binding: FragmentCommentListBinding? = null
     private val binding get() = _binding!!
-
-    var database = Firebase.firestore
 
     private lateinit var viewModel: CommentListViewModel
     private lateinit var adapter: CommentAdapter
@@ -48,19 +47,12 @@ class CommentListFragment : Fragment() {
 
         commentList.clear();
 
-        database.collection("Comments")
-            .whereEqualTo("movieId", movieId)
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    commentList.add(document.toObject<Comment>())
-                }
+        viewModel = ViewModelProvider(this).get(CommentListViewModel::class.java)
 
-                initRecyclerView()
-            }
-            .addOnFailureListener { exception ->
-                Log.w("Main Activity", "Error getting documents.", exception)
-            }
+        viewModel.getCommentsByMovieId(movieId){result ->
+            commentList = result
+            initRecyclerView()
+        };
 
         btnCreateComment = binding.btnCreateComment;
 
