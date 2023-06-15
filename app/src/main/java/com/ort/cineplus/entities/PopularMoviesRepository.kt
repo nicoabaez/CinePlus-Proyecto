@@ -8,6 +8,9 @@ import retrofit2.awaitResponse
 
 class PopularMoviesRepository {
     private lateinit var categoria: String
+    //private lateinit var popularMovies: MutableList<MovieX>
+    //private lateinit var : MutableList<MovieX>
+    //private lateinit var categoria: MutableList<MovieX>
 
     suspend fun getPopularMovies(): MutableList<MovieX> {
         categoria = "Popular Movies"

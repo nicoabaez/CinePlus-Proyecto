@@ -12,9 +12,9 @@ class MovieListFragmentViewModel : ViewModel() {
 
     val repository: PopularMoviesRepository = PopularMoviesRepository()
     private val _movieList = MutableLiveData<MutableList<MovieX>>()
-    val movieList: LiveData<MutableList<MovieX>> get() = _movieList
+    val popularMovieList: LiveData<MutableList<MovieX>> get() = _movieList
     private val _movieList2 = MutableLiveData<MutableList<MovieX>>()
-    val movieList2: LiveData<MutableList<MovieX>> get() = _movieList2
+    val upcomingMovieList: LiveData<MutableList<MovieX>> get() = _movieList2
 
     init {
         loadPopularMovies()
@@ -23,8 +23,7 @@ class MovieListFragmentViewModel : ViewModel() {
     private fun loadPopularMovies() {
         viewModelScope.launch {
             try {
-                val movies = repository.getPopularMovies()
-                _movieList.value = movies
+                _movieList.value = repository.getPopularMovies()
             } catch (e: Exception) {
                 // Manejo de errores generales
             }
@@ -33,8 +32,7 @@ class MovieListFragmentViewModel : ViewModel() {
     private fun loadUpcomingMovies(){
         viewModelScope.launch {
             try {
-                val movies = repository.getUpcomingMovies()
-                _movieList2.value = movies
+                _movieList2.value = repository.getUpcomingMovies()
             } catch (e: Exception) {
                 // Manejo de errores generales
             }
@@ -43,8 +41,7 @@ class MovieListFragmentViewModel : ViewModel() {
     fun searchMoviesByName(query: String) {
         viewModelScope.launch {
             try {
-                val movies = repository.searchMoviesByName(query)
-                _movieList.value = movies
+                _movieList.value = repository.searchMoviesByName(query)
             } catch (e: Exception) {
                 // Manejo de errores generales
             }
