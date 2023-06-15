@@ -61,7 +61,7 @@ class RegisterFragment : Fragment() {
                         userName.text.toString(),
                         email.text.toString(),
                         pass.text.toString(),
-                        false
+                        ""
                     )
                     viewModel.authRegister(user)
                     findNavController().navigate(action)
