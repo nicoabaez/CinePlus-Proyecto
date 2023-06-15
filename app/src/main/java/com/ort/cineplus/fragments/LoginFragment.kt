@@ -41,11 +41,15 @@ class LoginFragment : Fragment() {
         btnGoToRegister = v.findViewById(R.id.btnGoToRegister)
 
         btnLogin.setOnClickListener(){
-            if(viewModel.login(email.text.toString(), pass.text.toString())){
-                startActivity(Intent(activity, MainActivity::class.java))
+            if(!(email.text.isEmpty() || pass.text.isEmpty())){
+                if(viewModel.login(email.text.toString(), pass.text.toString())){
+                    startActivity(Intent(activity, MainActivity::class.java))
+                }else{
+                    Log.d("ERROR EN LOGIN:", "EL LOGIN DIO FALSO")
+                    Snackbar.make(v, "User or Password incorrect..", Snackbar.LENGTH_LONG).show()
+                }
             }else{
-                Log.d("ERROR EN LOGIN:", "EL LOGIN DIO FALSO")
-                Snackbar.make(v, "User or Password incorrect..", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(v, "User or Password is empty..", Snackbar.LENGTH_LONG).show()
             }
         }
 
@@ -61,9 +65,4 @@ class LoginFragment : Fragment() {
         // TODO: Use the ViewModel
 
     }
-
-    fun showError(){
-
-    }
-
 }

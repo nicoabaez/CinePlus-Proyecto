@@ -50,6 +50,7 @@ class MovieListFragment : Fragment() {
         binding.recyclerMovie.adapter = popularMoviesAdapter
     }
     private fun initRecyclerView2(movieList: MutableList<MovieX>){
+        binding.recyclerMovie2.visibility = View.VISIBLE
         binding.recyclerMovie2.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL,false)
         upcomingMoviesAdapter = MovieAdapter(movieList) { movie ->
             val action = MovieListFragmentDirections.actionListaFragmentToDetalleFragment(movie)
@@ -62,20 +63,6 @@ class MovieListFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-    /*private fun initRecyclerView(movieList: MutableList<MovieX>) {
-        if (!::adapter.isInitialized) {
-            adapter = MovieAdapter(movieList) { movie ->
-                val action = MovieListFragmentDirections.actionListaFragmentToDetalleFragment(movie)
-                findNavController().navigate(action)
-            }
-            binding.recyclerMovie.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            binding.recyclerMovie.adapter = adapter
-        }else{
-            adapter.updateMovieList(movieList)
-        }
-    }    */
-
 
     private fun hideKeyboard() {
         val imm: InputMethodManager = requireActivity().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager

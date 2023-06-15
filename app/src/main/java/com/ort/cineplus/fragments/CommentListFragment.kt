@@ -70,9 +70,6 @@ class CommentListFragment : Fragment() {
             findNavController().navigate(action)
         }
 
-
-        //var id = CommentListArgs.fromBundle(requireArguments()).movieId
-
         return binding.root
     }
 

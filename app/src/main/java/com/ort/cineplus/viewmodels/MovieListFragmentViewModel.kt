@@ -1,5 +1,6 @@
 package com.ort.cineplus.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,7 +26,7 @@ class MovieListFragmentViewModel : ViewModel() {
             try {
                 _movieList.value = repository.setPopularMovies()
             } catch (e: Exception) {
-                // Manejo de errores generales
+                Log.d("Error en loadPopularMovies()", e.message.toString())
             }
         }
     }
@@ -34,16 +35,17 @@ class MovieListFragmentViewModel : ViewModel() {
             try {
                 _movieList2.value = repository.setUpcomingMovies()
             } catch (e: Exception) {
-                // Manejo de errores generales
+                Log.d("Error en loadUpcomingMovies()", e.message.toString())
             }
         }
     }
     fun searchMoviesByName(query: String) {
         viewModelScope.launch {
             try {
-                _movieList.value = repository.searchMoviesByName(query)
+                val p = repository.searchMoviesByName(query)
+                _movieList.value = p
             } catch (e: Exception) {
-                // Manejo de errores generales
+                Log.d("Error en searchMoviesByName()", e.message.toString())
             }
         }
     }

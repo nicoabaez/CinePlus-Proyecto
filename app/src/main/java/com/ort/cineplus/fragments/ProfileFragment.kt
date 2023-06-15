@@ -72,7 +72,7 @@ class ProfileFragment : Fragment() {
         }
 
         btnGoToLogin.setOnClickListener(){
-            goToLoggin()
+            goToLogin()
         }
 
         imgProfile.setOnClickListener(){
@@ -130,7 +130,7 @@ class ProfileFragment : Fragment() {
     }
 
 
-    private fun goToLoggin(){
+    private fun goToLogin(){
         startActivity(Intent(activity, LoginActivity::class.java))
     }
 

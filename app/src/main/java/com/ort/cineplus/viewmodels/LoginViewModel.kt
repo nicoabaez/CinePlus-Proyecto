@@ -16,23 +16,10 @@ import com.ort.cineplus.activities.MainActivity
 import com.ort.cineplus.entities.User
 
 class LoginViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
-
     var auth: FirebaseAuth = FirebaseAuth.getInstance();
     var userLogged = false;
 
     fun login (email: String, pass:String) : Boolean{
-      /* db.collection("Users")
-            .get().addOnSuccessListener { result ->
-                 for(results in result){
-                     users.add(results.toObject())
-                 }
-            }
-        val userSearched = users.firstOrNull{it.email == email}
-        Log.d("Usuario buscado:", "el usuario dio: $userSearched")
-        if(userSearched != null){
-            return true;
-        }*/
         var result = false
         auth.signInWithEmailAndPassword(email, pass)
             .addOnCompleteListener() { task ->
@@ -52,7 +39,7 @@ class LoginViewModel : ViewModel() {
         return result;
     }
 
-    fun updateUser() {
+    private fun updateUser() {
        this.userLogged = true;
     }
 
