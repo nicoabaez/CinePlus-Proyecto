@@ -15,7 +15,6 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.ktx.storage
 import com.ort.cineplus.entities.User
 import kotlinx.coroutines.launch
 
@@ -27,7 +26,7 @@ class ProfileViewModel : ViewModel() {
     var _userName = MutableLiveData<String>()
     val user : LiveData<String> get() = _userName
     var database = Firebase.firestore
-    private val storageRef = Firebase.storage.reference
+    private val storageRef = FirebaseStorage.getInstance().reference
     private val currentUser = Firebase.auth.currentUser
 
     fun logout(){
