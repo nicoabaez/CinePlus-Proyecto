@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class MovieListFragmentViewModel : ViewModel() {
 
-    val repository: PopularMoviesRepository = PopularMoviesRepository()
+    private val repository: PopularMoviesRepository = PopularMoviesRepository()
     private val _movieList = MutableLiveData<MutableList<MovieX>>()
     val popularMovieList: LiveData<MutableList<MovieX>> get() = _movieList
     private val _movieList2 = MutableLiveData<MutableList<MovieX>>()
@@ -23,7 +23,7 @@ class MovieListFragmentViewModel : ViewModel() {
     private fun loadPopularMovies() {
         viewModelScope.launch {
             try {
-                _movieList.value = repository.getPopularMovies()
+                _movieList.value = repository.setPopularMovies()
             } catch (e: Exception) {
                 // Manejo de errores generales
             }
@@ -32,7 +32,7 @@ class MovieListFragmentViewModel : ViewModel() {
     private fun loadUpcomingMovies(){
         viewModelScope.launch {
             try {
-                _movieList2.value = repository.getUpcomingMovies()
+                _movieList2.value = repository.setUpcomingMovies()
             } catch (e: Exception) {
                 // Manejo de errores generales
             }

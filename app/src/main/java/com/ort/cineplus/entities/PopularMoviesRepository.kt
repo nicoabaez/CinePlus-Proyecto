@@ -2,17 +2,16 @@ package com.ort.cineplus.entities
 
 import com.ort.cineplus.models.ApiResponse
 import com.ort.cineplus.models.MovieDbClient
+import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.awaitResponse
 
 
 class PopularMoviesRepository {
-    private lateinit var categoria: String
-    //private lateinit var popularMovies: MutableList<MovieX>
-    //private lateinit var : MutableList<MovieX>
-    //private lateinit var categoria: MutableList<MovieX>
 
-    suspend fun getPopularMovies(): MutableList<MovieX> {
+    private lateinit var categoria: String
+
+    suspend fun setPopularMovies(): MutableList<MovieX>{
         categoria = "Popular Movies"
         val call: Call<ApiResponse> = MovieDbClient.getService().getMovies("movie/popular?api_key=63057ce88755d35487b8da66201da7b3&language=en-US&page=1")
         val response = call.awaitResponse()
@@ -22,7 +21,7 @@ class PopularMoviesRepository {
             mutableListOf()
         }
     }
-    suspend fun getUpcomingMovies(): MutableList<MovieX> {
+    suspend fun setUpcomingMovies(): MutableList<MovieX>{
         //https://api.themoviedb.org/3/movie/upcoming?api_key=63057ce88755d35487b8da66201da7b3&language=en-US&page=1
         categoria = "Upcoming Movies"
         val call: Call<ApiResponse> = MovieDbClient.getService().getMovies("movie/upcoming?api_key=63057ce88755d35487b8da66201da7b3&language=en-US&page=1")
