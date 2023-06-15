@@ -6,16 +6,22 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ort.cineplus.entities.MovieX
-import com.ort.cineplus.entities.PopularMoviesRepository
+import com.ort.cineplus.entities.MovieRepository
 import kotlinx.coroutines.launch
 
 class MovieListFragmentViewModel : ViewModel() {
 
-    private val repository: PopularMoviesRepository = PopularMoviesRepository()
+    private val repository: MovieRepository = MovieRepository()
+
     private val _movieList = MutableLiveData<MutableList<MovieX>>()
     val popularMovieList: LiveData<MutableList<MovieX>> get() = _movieList
+
     private val _movieList2 = MutableLiveData<MutableList<MovieX>>()
     val upcomingMovieList: LiveData<MutableList<MovieX>> get() = _movieList2
+
+    private val _movieList3 = MutableLiveData<MutableList<MovieX>>()
+    val searchedMovies: LiveData<MutableList<MovieX>> get() = _movieList3
+
 
     init {
         loadPopularMovies()
@@ -42,8 +48,7 @@ class MovieListFragmentViewModel : ViewModel() {
     fun searchMoviesByName(query: String) {
         viewModelScope.launch {
             try {
-                val p = repository.searchMoviesByName(query)
-                _movieList.value = p
+                _movieList3.value = repository.searchMoviesByName(query,1)
             } catch (e: Exception) {
                 Log.d("Error en searchMoviesByName()", e.message.toString())
             }

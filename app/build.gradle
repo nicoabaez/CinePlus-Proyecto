@@ -50,11 +50,11 @@ dependencies {
     //Co-rutinas
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
     //Fragment
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0'
     //Activity
     implementation 'androidx.activity:activity-ktx:1.7.2'
     //Navigation
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.6.0'
     //Agregamos la dependencia para mostrar imagenes con url
     implementation "com.github.bumptech.glide:glide:4.13.0"
     //Dependencies for TMDB
@@ -64,6 +64,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     //coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0'
     //firebase
     implementation platform('com.google.firebase:firebase-bom:31.5.0')
     implementation 'com.google.firebase:firebase-firestore-ktx'
