@@ -8,6 +8,9 @@ import retrofit2.awaitResponse
 
 class PopularMoviesRepository {
     private lateinit var categoria: String
+    //private lateinit var popularMovies: MutableList<MovieX>
+    //private lateinit var : MutableList<MovieX>
+    //private lateinit var categoria: MutableList<MovieX>
 
     suspend fun getPopularMovies(): MutableList<MovieX> {
         categoria = "Popular Movies"
@@ -19,7 +22,17 @@ class PopularMoviesRepository {
             mutableListOf()
         }
     }
-
+    suspend fun getUpcomingMovies(): MutableList<MovieX> {
+        //https://api.themoviedb.org/3/movie/upcoming?api_key=63057ce88755d35487b8da66201da7b3&language=en-US&page=1
+        categoria = "Upcoming Movies"
+        val call: Call<ApiResponse> = MovieDbClient.getService().getMovies("movie/upcoming?api_key=63057ce88755d35487b8da66201da7b3&language=en-US&page=1")
+        val response = call.awaitResponse()
+        return if (response.isSuccessful) {
+            response.body()?.results ?: mutableListOf()
+        } else {
+            mutableListOf()
+        }
+    }
     suspend fun searchMoviesByName(query: String): MutableList<MovieX> {
         val call: Call<ApiResponse> = MovieDbClient.getService().getMovies("search/movie?api_key=63057ce88755d35487b8da66201da7b3&language=en-US&query=${query}&page=1&include_adult=false")
 

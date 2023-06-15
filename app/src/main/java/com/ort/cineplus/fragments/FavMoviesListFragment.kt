@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ort.cineplus.R
+import com.ort.cineplus.viewmodels.FavMoviesListViewModel
 
 class FavMoviesListFragment : Fragment() {
 

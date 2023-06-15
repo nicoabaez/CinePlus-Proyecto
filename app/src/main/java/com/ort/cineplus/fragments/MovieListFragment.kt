@@ -15,13 +15,15 @@ import com.ort.cineplus.databinding.FragmentMovieListBinding
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.lifecycle.ViewModelProvider
 import com.ort.cineplus.entities.MovieX
+import com.ort.cineplus.viewmodels.MovieListFragmentViewModel
 
 class MovieListFragment : Fragment() {
 
     private var _binding: FragmentMovieListBinding? = null
     private val binding get() = _binding!!
-    private lateinit var adapter: MovieAdapter
     private lateinit var viewModel: MovieListFragmentViewModel
+    private lateinit var popularMoviesAdapter: MovieAdapter
+    private lateinit var upcomingMoviesAdapter: MovieAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,19 +36,32 @@ class MovieListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[MovieListFragmentViewModel::class.java]
-        viewModel.movieList.observe(viewLifecycleOwner) { movies -> initRecyclerView(movies.toMutableList()) }
+        viewModel.popularMovieList.observe(viewLifecycleOwner) { movies -> initRecyclerView(movies.toMutableList()) }
+        viewModel.upcomingMovieList.observe(viewLifecycleOwner) { movies -> initRecyclerView2(movies.toMutableList()) }
         setupSearchView()
     }
 
     private fun initRecyclerView(movieList: MutableList<MovieX>){
         binding.recyclerMovie.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL,false)
-        adapter = MovieAdapter(movieList) { movie ->
+        popularMoviesAdapter = MovieAdapter(movieList) { movie ->
             val action = MovieListFragmentDirections.actionListaFragmentToDetalleFragment(movie)
             findNavController().navigate(action)
         }
-        binding.recyclerMovie.adapter = adapter
+        binding.recyclerMovie.adapter = popularMoviesAdapter
+    }
+    private fun initRecyclerView2(movieList: MutableList<MovieX>){
+        binding.recyclerMovie2.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL,false)
+        upcomingMoviesAdapter = MovieAdapter(movieList) { movie ->
+            val action = MovieListFragmentDirections.actionListaFragmentToDetalleFragment(movie)
+            findNavController().navigate(action)
+        }
+        binding.recyclerMovie2.adapter = upcomingMoviesAdapter
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     /*private fun initRecyclerView(movieList: MutableList<MovieX>) {
         if (!::adapter.isInitialized) {

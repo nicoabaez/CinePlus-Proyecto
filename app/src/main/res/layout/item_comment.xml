@@ -9,16 +9,30 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/commentCard"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="103dp"
         android:layout_margin="5dp"
+        android:textAlignment="center"
+        app:cardBackgroundColor="@color/purple_500"
         app:cardCornerRadius="5dp">
 
         <TextView
-            android:id="@+id/detailComment"
-            android:layout_width="match_parent"
+            android:id="@+id/userEmailComment"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/detailComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hapticFeedbackEnabled="false"
             android:text="ITEM COMENTARIO"
-            android:textSize="48sp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:translationX="10px"
+            android:translationY="100px"
             tools:ignore="HardcodedText" />
     </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

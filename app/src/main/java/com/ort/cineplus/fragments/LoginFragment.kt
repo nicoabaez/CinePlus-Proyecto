@@ -1,7 +1,6 @@
 package com.ort.cineplus.fragments
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,15 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.ort.cineplus.R
-import com.ort.cineplus.activities.LoginActivity
 import com.ort.cineplus.activities.MainActivity
+import com.ort.cineplus.viewmodels.LoginViewModel
 
 
 class LoginFragment : Fragment() {
