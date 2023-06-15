@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.net.Uri
 import android.opengl.Visibility
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -22,6 +23,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.auth.User
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 import com.ort.cineplus.R
 import com.ort.cineplus.activities.LoginActivity
 import com.ort.cineplus.activities.MainActivity
@@ -30,7 +33,7 @@ import kotlin.math.log
 
 class ProfileFragment : Fragment() {
 
-    private val CODE = 50
+    private val CODE: Int = 50
     private lateinit var viewModel: ProfileViewModel
     lateinit var titleInfo: TextView
     lateinit var btnGoToLogin: Button
@@ -41,6 +44,7 @@ class ProfileFragment : Fragment() {
     lateinit var lblEmailProfile: TextView
     lateinit var imgProfile: ImageView
     private val user = Firebase.auth.currentUser
+    private val storageRef = Firebase.storage.reference
     private val goToMovieList = ProfileFragmentDirections.profileGoToMovieList()
 
     @SuppressLint("MissingInflatedId")
@@ -76,7 +80,8 @@ class ProfileFragment : Fragment() {
         }
 
         imgProfile.setOnClickListener(){
-            this.activity?.let { it1 -> viewModel.changeImageProfile(it1, this.CODE) }
+           /* this.activity?.let { it1 -> viewModel.changeImageProfile(it1, 50) }*/
+            viewModel.changeImageProfile(activity!!, CODE)
         }
 
         viewModel.user.observe(viewLifecycleOwner) { user ->
@@ -97,9 +102,9 @@ class ProfileFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         Log.d(TAG, "onActivityResult: called")
-        if (requestCode == CODE && resultCode == Activity.RESULT_OK) {
+        if (requestCode == 50 && resultCode == Activity.RESULT_OK) {
             data?.data?.let { imageUri ->
-                viewModel.saveImageToFirebaseStorage(imageUri)
+                saveImageToFirebaseStorage(imageUri)
             }
         }
     }
@@ -137,6 +142,27 @@ class ProfileFragment : Fragment() {
     private fun setInfoProfile(){
         lblUsernameProfile.text = viewModel.user.value
         lblEmailProfile.text = user?.email.toString()
+    }
+
+    private fun saveImageToFirebaseStorage(imageUri: Uri) {
+        val reference = storageRef.child("mountains.jpg")
+        val referenceProfileImageRef = reference.child("profile_images/${user?.uid}.jpg")
+
+
+        val uploadTask = referenceProfileImageRef.putFile(imageUri)
+        uploadTask.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                // La imagen se ha subido correctamente
+                referenceProfileImageRef.downloadUrl.addOnSuccessListener { uri ->
+                    // Aquí puedes guardar la URL de descarga en Firestore o actualizar otros datos del usuario
+                    Log.d(TAG, "la uri de la imagen es +${uri}")
+                }
+            } else {
+                // Ha ocurrido un error al subir la imagen
+                val exception = task.exception
+                Log.d(TAG, "Hay un error al subir la imagen al storage +${task.exception}")
+            }
+        }
     }
 
 
