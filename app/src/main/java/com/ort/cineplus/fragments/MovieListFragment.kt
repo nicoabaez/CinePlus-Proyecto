@@ -24,6 +24,7 @@ class MovieListFragment : Fragment() {
     private lateinit var viewModel: MovieListFragmentViewModel
     private lateinit var popularMoviesAdapter: MovieAdapter
     private lateinit var upcomingMoviesAdapter: MovieAdapter
+    private lateinit var searchedMoviesAdapter: MovieAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,10 +39,12 @@ class MovieListFragment : Fragment() {
         viewModel = ViewModelProvider(this)[MovieListFragmentViewModel::class.java]
         viewModel.popularMovieList.observe(viewLifecycleOwner) { movies -> initRecyclerView(movies.toMutableList()) }
         viewModel.upcomingMovieList.observe(viewLifecycleOwner) { movies -> initRecyclerView2(movies.toMutableList()) }
+        viewModel.searchedMovies.observe(viewLifecycleOwner) { movies -> initRecyclerView3(movies.toMutableList()) }
         setupSearchView()
     }
 
     private fun initRecyclerView(movieList: MutableList<MovieX>){
+        binding.titleCategory1.text = "POPULAR MOVIES"
         binding.recyclerMovie.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL,false)
         popularMoviesAdapter = MovieAdapter(movieList) { movie ->
             val action = MovieListFragmentDirections.actionListaFragmentToDetalleFragment(movie)
@@ -50,13 +53,23 @@ class MovieListFragment : Fragment() {
         binding.recyclerMovie.adapter = popularMoviesAdapter
     }
     private fun initRecyclerView2(movieList: MutableList<MovieX>){
-        binding.recyclerMovie2.visibility = View.VISIBLE
+        binding.titleCategory2.text = "UPCOMING MOVIES"
         binding.recyclerMovie2.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL,false)
         upcomingMoviesAdapter = MovieAdapter(movieList) { movie ->
             val action = MovieListFragmentDirections.actionListaFragmentToDetalleFragment(movie)
             findNavController().navigate(action)
         }
         binding.recyclerMovie2.adapter = upcomingMoviesAdapter
+    }
+
+    private fun initRecyclerView3(movieList: MutableList<MovieX>){
+        binding.titleCategory3.text = "SEARCHED MOVIES"
+        binding.recyclerMovie3.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL,false)
+        searchedMoviesAdapter = MovieAdapter(movieList) { movie ->
+            val action = MovieListFragmentDirections.actionListaFragmentToDetalleFragment(movie)
+            findNavController().navigate(action)
+        }
+        binding.recyclerMovie3.adapter = searchedMoviesAdapter
     }
 
     override fun onDestroyView() {
@@ -73,12 +86,15 @@ class MovieListFragment : Fragment() {
         binding.searchMovie.setOnQueryTextListener(object : OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (!query.isNullOrEmpty()) {
+                    binding.titleCategory1.visibility = View.GONE
+                    binding.titleCategory2.visibility = View.GONE
+                    binding.recyclerMovie.visibility = View.GONE
+                    binding.recyclerMovie2.visibility = View.GONE
                     viewModel.searchMoviesByName(query)
                     hideKeyboard()
                 }
                 return true
             }
-
             override fun onQueryTextChange(p0: String?): Boolean {
                 return true
             }

@@ -1,56 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/viewRoot"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.MovieListFragment">
+    android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchMovie"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/viewRoot"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@android:color/white"
-        app:iconifiedByDefault="false"
-        app:queryBackground="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@id/titleCategory"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/titleCategory"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@+id/searchMovie"
-        tools:ignore="HardcodedText" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerMovie"
-        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:scrollbars="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleCategory">
+        tools:context=".fragments.MovieListFragment"
+        tools:ignore="ExtraText">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchMovie"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@android:color/white"
+            app:iconifiedByDefault="false"
+            app:layout_constraintBottom_toTopOf="@+id/titleCategory_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:queryBackground="@android:color/white" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerMovie_2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:scrollbars="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerMovie">
+        <TextView
+            android:id="@+id/titleCategory_1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerMovie"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchMovie" />
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerMovie"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/titleCategory_1"
+            app:layout_constraintBottom_toTopOf="@+id/titleCategory_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/titleCategory_2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerMovie_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerMovie" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerMovie_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/titleCategory_2"
+            app:layout_constraintBottom_toTopOf="@+id/titleCategory_3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/titleCategory_3"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerMovie_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerMovie_2" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerMovie_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/titleCategory_3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
