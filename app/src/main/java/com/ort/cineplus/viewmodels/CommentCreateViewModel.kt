@@ -20,7 +20,7 @@ class CommentCreateViewModel : ViewModel() {
             movieId,
             commentDescription
         )
-        
+
         database.collection("Comments").document()
             .set(comment)
             .addOnSuccessListener { documentReference ->
