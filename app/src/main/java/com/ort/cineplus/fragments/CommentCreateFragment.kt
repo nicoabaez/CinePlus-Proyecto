@@ -28,7 +28,6 @@ class CommentCreateFragment : Fragment() {
     private lateinit var btnCreateCommentConfirm : Button
     private lateinit var commentInput: EditText
     private lateinit var title: TextView
-    private lateinit var comment: Comment
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance();
 
