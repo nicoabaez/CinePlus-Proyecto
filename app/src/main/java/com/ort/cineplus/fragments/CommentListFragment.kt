@@ -24,7 +24,6 @@ class CommentListFragment : Fragment() {
     companion object {
         fun newInstance() = CommentListFragment()
     }
-
     private var _binding: FragmentCommentListBinding? = null
     private val binding get() = _binding!!
 
@@ -32,7 +31,6 @@ class CommentListFragment : Fragment() {
     private lateinit var adapter: CommentAdapter
     private var commentList : MutableList<Comment> = mutableListOf()
     private lateinit var btnCreateComment : Button
-
 
     //private lateinit var btnCommentList: Button
     //private lateinit var txtId : TextView

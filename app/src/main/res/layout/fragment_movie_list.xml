@@ -42,10 +42,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:scrollbars="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/titleCategory_1"
             app:layout_constraintBottom_toTopOf="@+id/titleCategory_2"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/titleCategory_1" />
 
         <TextView
             android:id="@+id/titleCategory_2"

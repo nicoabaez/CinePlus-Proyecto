@@ -22,11 +22,11 @@ class MovieListFragmentViewModel : ViewModel() {
     private val _movieList3 = MutableLiveData<MutableList<MovieX>>()
     val searchedMovies: LiveData<MutableList<MovieX>> get() = _movieList3
 
-
     init {
         loadPopularMovies()
         loadUpcomingMovies()
     }
+
     private fun loadPopularMovies() {
         viewModelScope.launch {
             try {

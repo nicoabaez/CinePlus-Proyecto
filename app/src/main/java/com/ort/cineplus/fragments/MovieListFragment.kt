@@ -95,7 +95,14 @@ class MovieListFragment : Fragment() {
                 }
                 return true
             }
-            override fun onQueryTextChange(p0: String?): Boolean {
+            override fun onQueryTextChange(query: String?): Boolean {
+                if(query.isNullOrEmpty()){
+                    binding.titleCategory1.visibility = View.VISIBLE
+                    binding.titleCategory2.visibility = View.VISIBLE
+                    binding.recyclerMovie.visibility = View.VISIBLE
+                    binding.recyclerMovie2.visibility = View.VISIBLE
+                    hideKeyboard()
+                }
                 return true
             }
         })
