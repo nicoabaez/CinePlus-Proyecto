@@ -33,14 +33,14 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        var v = inflater.inflate(R.layout.fragment_login, container, false)
+        val v = inflater.inflate(R.layout.fragment_login, container, false)
 
         email = v.findViewById(R.id.txtEmailLogin)
         pass = v.findViewById(R.id.txtPassLogin)
         btnLogin = v.findViewById(R.id.btnLogin)
         btnGoToRegister = v.findViewById(R.id.btnGoToRegister)
 
-        btnLogin.setOnClickListener(){
+        btnLogin.setOnClickListener{
             if(!(email.text.isEmpty() || pass.text.isEmpty())){
                 if(viewModel.login(email.text.toString(), pass.text.toString())){
                     startActivity(Intent(activity, MainActivity::class.java))
@@ -53,7 +53,7 @@ class LoginFragment : Fragment() {
             }
         }
 
-        btnGoToRegister.setOnClickListener(){
+        btnGoToRegister.setOnClickListener{
             findNavController().navigate(action)
         }
         return v
@@ -61,7 +61,7 @@ class LoginFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         // TODO: Use the ViewModel
 
     }

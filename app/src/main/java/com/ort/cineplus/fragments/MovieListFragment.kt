@@ -15,13 +15,13 @@ import com.ort.cineplus.databinding.FragmentMovieListBinding
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.lifecycle.ViewModelProvider
 import com.ort.cineplus.entities.MovieX
-import com.ort.cineplus.viewmodels.MovieListFragmentViewModel
+import com.ort.cineplus.viewmodels.MovieListViewModel
 
 class MovieListFragment : Fragment() {
 
     private var _binding: FragmentMovieListBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: MovieListFragmentViewModel
+    private lateinit var viewModel: MovieListViewModel
     private lateinit var popularMoviesAdapter: MovieAdapter
     private lateinit var upcomingMoviesAdapter: MovieAdapter
     private lateinit var searchedMoviesAdapter: MovieAdapter
@@ -36,7 +36,7 @@ class MovieListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[MovieListFragmentViewModel::class.java]
+        viewModel = ViewModelProvider(this)[MovieListViewModel::class.java]
         viewModel.popularMovieList.observe(viewLifecycleOwner) { movies -> initRecyclerView(movies.toMutableList()) }
         viewModel.upcomingMovieList.observe(viewLifecycleOwner) { movies -> initRecyclerView2(movies.toMutableList()) }
         viewModel.searchedMovies.observe(viewLifecycleOwner) { movies -> initRecyclerView3(movies.toMutableList()) }

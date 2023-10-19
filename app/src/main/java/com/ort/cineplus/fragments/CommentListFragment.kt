@@ -2,7 +2,6 @@ package com.ort.cineplus.fragments
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,14 +9,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.ktx.Firebase
 import com.ort.cineplus.adapters.CommentAdapter
 import com.ort.cineplus.databinding.FragmentCommentListBinding
 import com.ort.cineplus.entities.Comment
 import com.ort.cineplus.viewmodels.CommentListViewModel
-import kotlinx.coroutines.*
 
 class CommentListFragment : Fragment() {
 
@@ -41,21 +36,21 @@ class CommentListFragment : Fragment() {
     ): View {
         _binding = FragmentCommentListBinding.inflate(inflater,container,false)
 
-        var movieId = CommentListFragmentArgs.fromBundle(requireArguments()).movieId
+        val movieId = CommentListFragmentArgs.fromBundle(requireArguments()).movieId
 
-        commentList.clear();
+        commentList.clear()
 
-        viewModel = ViewModelProvider(this).get(CommentListViewModel::class.java)
+        viewModel = ViewModelProvider(this)[CommentListViewModel::class.java]
 
         viewModel.getCommentsByMovieId(movieId){result ->
             commentList = result
             initRecyclerView()
-        };
+        }
 
-        btnCreateComment = binding.btnCreateComment;
+        btnCreateComment = binding.btnCreateComment
 
-        btnCreateComment.text = "Crear Comentario";
-        btnCreateComment.setOnClickListener(){
+        btnCreateComment.text = "Make a comment"
+        btnCreateComment.setOnClickListener{
             val action = CommentListFragmentDirections.actionCommentListToCommentCreateFragment(movieId)
             findNavController().navigate(action)
         }
@@ -65,14 +60,14 @@ class CommentListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CommentListViewModel::class.java)
+        viewModel = ViewModelProvider(this)[CommentListViewModel::class.java]
         // TODO: Use the ViewModel
     }
 
     private fun initRecyclerView(){
         binding.recyclerComment.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL,false)
         adapter = CommentAdapter(commentList){position ->
-
+            position.toString()
         }
         binding.recyclerComment.adapter = adapter
     }

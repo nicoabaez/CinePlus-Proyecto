@@ -6,12 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.ort.cineplus.R
 import com.ort.cineplus.adapters.MovieAdapter
 import com.ort.cineplus.databinding.FragmentMovieDetailBinding
 import com.ort.cineplus.entities.MovieX
@@ -23,7 +21,7 @@ class MovieDetailFragment : Fragment() {
     private lateinit var viewModel: MovieDetailViewModel
     private lateinit var similarMoviesAdapter: MovieAdapter
 
-    lateinit var movie: MovieX
+    private lateinit var movie: MovieX
 
     private lateinit var btnCommentList : Button
 
@@ -35,7 +33,7 @@ class MovieDetailFragment : Fragment() {
 
         btnCommentList = binding.btnCommentList
 
-        btnCommentList.setOnClickListener(){
+        btnCommentList.setOnClickListener{
             val action = MovieDetailFragmentDirections.actionMovieDetailFragmentToCommentList(MovieDetailFragmentArgs.fromBundle(requireArguments()).movie.id)
             findNavController().navigate(action)
         }

@@ -17,7 +17,7 @@ class MovieRepository {
         }
     }
     suspend fun setUpcomingMovies(): MutableList<MovieX>{
-        val call: Call<ApiResponse> = MovieDbClient.getService().getMovies("movie/upcoming?api_key=63057ce88755d35487b8da66201da7b3&language=en-US&page=1")
+        val call: Call<ApiResponse> = MovieDbClient.getService().getMovies("movie/upcoming?api_key=63057ce88755d35487b8da66201da7b3&language=en-US&page=2")
         val response = call.awaitResponse()
         return if (response.isSuccessful) {
             response.body()?.results ?: mutableListOf()

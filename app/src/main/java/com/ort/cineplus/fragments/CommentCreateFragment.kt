@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.ort.cineplus.databinding.FragmentCommentCreateBinding
-import com.ort.cineplus.entities.Comment
 import com.ort.cineplus.viewmodels.CommentCreateViewModel
 
 class CommentCreateFragment : Fragment() {
@@ -29,36 +28,35 @@ class CommentCreateFragment : Fragment() {
     private lateinit var commentInput: EditText
     private lateinit var title: TextView
 
-    private val auth: FirebaseAuth = FirebaseAuth.getInstance();
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentCommentCreateBinding.inflate(inflater,container,false)
 
         btnCreateCommentConfirm = binding.btnCreateCommentConfirm
         commentInput = binding.plainTxtCommentInput
         title = binding.txtTitle
 
-        title.text = "Crea tu Comentario";
+        title.text = "MAKE A COMMENT"
 
-        var movieId = CommentCreateFragmentArgs.fromBundle(requireArguments()).movieId
+        val movieId = CommentCreateFragmentArgs.fromBundle(requireArguments()).movieId
 
-        btnCreateCommentConfirm.text = "Crear";
-        btnCreateCommentConfirm.setOnClickListener() {
+        btnCreateCommentConfirm.text = "Send"
+        btnCreateCommentConfirm.setOnClickListener{
             if (viewModel.checkComment(commentInput.text.toString())) {
                 if (viewModel.postComment(auth.currentUser?.email.toString(), movieId, commentInput.text.toString())) {
-                    Snackbar.make(binding.root, "Your_Text", Snackbar.LENGTH_LONG);
-
+                    Snackbar.make(binding.root, "Your_Text", Snackbar.LENGTH_LONG).show()
                 } else {
                     Snackbar.make(binding.root, "An Error occurred", Snackbar.LENGTH_LONG).show()
                 }
             } else {
                 Snackbar.make(binding.root, "The comment can´t be empty...", Snackbar.LENGTH_LONG).show()
             }
-            val fm = fragmentManager;
-            fm?.popBackStack();
+            val fm = fragmentManager
+            fm?.popBackStack()
         }
 
 
@@ -67,7 +65,7 @@ class CommentCreateFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CommentCreateViewModel::class.java)
+        viewModel = ViewModelProvider(this)[CommentCreateViewModel::class.java]
         // TODO: Use the ViewModel
     }
 

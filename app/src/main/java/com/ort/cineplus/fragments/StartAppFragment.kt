@@ -9,10 +9,11 @@ import android.view.ViewGroup
 import com.ort.cineplus.R
 import com.ort.cineplus.viewmodels.StartAppViewModel
 
+@Suppress("DEPRECATION")
 class StartAppFragment : Fragment() {
 
     companion object {
-        fun newInstance() = StartAppFragment()
+        //fun newInstance() = StartAppFragment()
     }
 
     private lateinit var viewModel: StartAppViewModel
@@ -24,9 +25,10 @@ class StartAppFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_start_app, container, false)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(StartAppViewModel::class.java)
+        viewModel = ViewModelProvider(this)[StartAppViewModel::class.java]
         // TODO: Use the ViewModel
     }
 

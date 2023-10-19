@@ -51,16 +51,6 @@
             app:argType="integer" />
     </fragment>
     <fragment
-        android:id="@+id/configApp"
-        android:name="com.ort.cineplus.fragments.ConfigAppFragment"
-        android:label="fragment_config_app"
-        tools:layout="@layout/fragment_config_app" />
-    <fragment
-        android:id="@+id/favMoviesListFragment"
-        android:name="com.ort.cineplus.fragments.FavMoviesListFragment"
-        android:label="fragment_fav_movies_list"
-        tools:layout="@layout/fragment_fav_movies_list" />
-    <fragment
         android:id="@+id/profile"
         android:name="com.ort.cineplus.fragments.ProfileFragment"
         android:label="fragment_profile"

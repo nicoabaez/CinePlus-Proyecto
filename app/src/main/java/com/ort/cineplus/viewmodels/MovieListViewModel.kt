@@ -9,7 +9,7 @@ import com.ort.cineplus.entities.MovieX
 import com.ort.cineplus.entities.MovieRepository
 import kotlinx.coroutines.launch
 
-class MovieListFragmentViewModel : ViewModel() {
+class MovieListViewModel : ViewModel() {
 
     private val repository: MovieRepository = MovieRepository()
 

@@ -11,7 +11,6 @@ import android.widget.EditText
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import androidx.lifecycle.lifecycleScope
-import com.ort.cineplus.R
 import com.ort.cineplus.databinding.FragmentRegisterBinding
 import com.ort.cineplus.entities.User
 import com.ort.cineplus.viewmodels.RegisterViewModel
@@ -32,7 +31,7 @@ class RegisterFragment : Fragment() {
     private lateinit var btnRegister: Button
     private lateinit var user: User
     private val action = RegisterFragmentDirections.registerToLogin()
-    private lateinit var v : View;
+    private lateinit var v : View
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
@@ -54,7 +53,7 @@ class RegisterFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        btnRegister.setOnClickListener() {
+        btnRegister.setOnClickListener{
             lifecycleScope.launch {
                 if (checkCredentials()) {
                     user = User(
@@ -87,8 +86,7 @@ class RegisterFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
+        viewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
         // TODO: Use the ViewModel
-
         }
     }

@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.ort.cineplus.R
 import com.ort.cineplus.viewmodels.CommentDetailViewModel
-
 class CommentDetailFragment : Fragment() {
 
     companion object {
@@ -26,8 +25,7 @@ class CommentDetailFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CommentDetailViewModel::class.java)
+        viewModel = ViewModelProvider(this)[CommentDetailViewModel::class.java]
         // TODO: Use the ViewModel
     }
-
 }
